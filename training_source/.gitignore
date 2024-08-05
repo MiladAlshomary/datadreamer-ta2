@@ -1,0 +1,10 @@
+__pycache__
+penn_slurm*.stdout
+penn_slurm_logs/
+sentence-transformers
+rrivera1849
+longformer
+data
+venv
+gram2vec
+*output
