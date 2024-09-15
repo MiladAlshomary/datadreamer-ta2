@@ -26,120 +26,94 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.distributed.nn
 
-class SupConLoss(nn.Module):
-    """Supervised Contrastive Learning: https://arxiv.org/pdf/2004.11362.pdf.
-    It also supports the unsupervised contrastive loss in SimCLR"""
-    def __init__(self, model, temperature=0.07, contrast_mode='all',
-                 base_temperature=0.07):
-        super(SupConLoss, self).__init__()
+
+def compute_cross_entropy(p, q):
+    q = F.log_softmax(q, dim=-1)
+    loss = torch.sum(p * q, dim=-1)
+    return - loss.mean()
+
+
+def stablize_logits(logits):
+    logits_max, _ = torch.max(logits, dim=-1, keepdim=True)
+    logits = logits - logits_max.detach()
+    return logits
+
+
+@torch.no_grad()
+def concat_all_gather(tensor):
+    """
+    Performs all_gather operation on the provided tensors.
+    *** Warning ***: torch.distributed.all_gather has no gradient.
+    """
+    tensors_gather = [torch.ones_like(tensor)
+                      for _ in range(torch.distributed.get_world_size())]
+    torch.distributed.all_gather(tensors_gather, tensor, async_op=False)
+
+    output = torch.cat(tensors_gather, dim=0)
+    return output
+
+class MultiPosConLoss(nn.Module):
+    """
+    Multi-Positive Contrastive Loss: https://arxiv.org/pdf/2306.00984.pdf
+    """
+
+    def __init__(self, model, temperature=0.1):
+        super(MultiPosConLoss, self).__init__()
         self.temperature = temperature
-        self.contrast_mode = contrast_mode
-        self.base_temperature = base_temperature
+        self.logits_mask = None
+        self.mask = None
+        self.last_local_batch_size = None
         self.model = model
+        
+    def set_temperature(self, temp=0.1):
+        self.temperature = temp
 
     def forward(self, sentence_features, labels=None, mask=None):
-        """Compute loss for model. If both `labels` and `mask` are None,
-        it degenerates to SimCLR unsupervised loss:
-        https://arxiv.org/pdf/2002.05709.pdf
 
-        Args:
-            features: hidden vector of shape [bsz, n_views, ...].
-            labels: ground truth of shape [bsz].
-            mask: contrastive mask of shape [bsz, bsz], mask_{i,j}=1 if sample j
-                has the same class as sample i. Can be asymmetric.
-        Returns:
-            A loss scalar.
-        """
-        #print(sentence_features)
-        
         reps = [self.model(sentence_feature) for sentence_feature in sentence_features]
-        anchor = reps[0]['sentence_embedding']
+        feats = reps[0]['sentence_embedding']
         
-        anchor = anchor.unsqueeze(1) #
-
-        #print('=============')
-        #print(anchor)
-        #print(labels)
-        labels_list = labels.tolist()
-        label_occ = {}
-        for num in set(labels_list):
-          label_occ[num] = labels_list.count(num)
-        print([x for x in label_occ.items() if x[1] > 1])
+        #feats = outputs['feats']    # feats shape: [B, D]
+        #labels = outputs['labels']    # labels shape: [B]
 
         device = (torch.device('cuda')
-                  if anchor.is_cuda
+                  if feats.is_cuda
                   else torch.device('cpu'))
 
-        if len(anchor.shape) < 3:
-            raise ValueError('`features` needs to be [bsz, n_views, ...],'
-                             'at least 3 dimensions are required')
-        if len(anchor.shape) > 3:
-            anchor = anchor.view(anchor.shape[0], anchor.shape[1], -1)
+        feats = F.normalize(feats, dim=-1, p=2)
+        local_batch_size = feats.size(0)
 
-        batch_size = anchor.shape[0]
-        if labels is not None and mask is not None:
-            raise ValueError('Cannot define both `labels` and `mask`')
-        elif labels is None and mask is None:
-            mask = torch.eye(batch_size, dtype=torch.float32).to(device)
-        elif labels is not None:
-            labels = labels.contiguous().view(-1, 1)
-            if labels.shape[0] != batch_size:
-                raise ValueError('Num of labels does not match num of features')
-            mask = torch.eq(labels, labels.T).float().to(device)
-        else:
-            mask = mask.float().to(device)
+        #all_feats = torch.cat(feats, dim=0)
+        #all_labels = concat_all_gather(labels)  # no gradient gather
 
-        #print(mask)
+        all_feats  = feats
+        all_labels = labels
         
-        contrast_count = anchor.shape[1]
-        contrast_feature = torch.cat(torch.unbind(anchor, dim=1), dim=0)
-        if self.contrast_mode == 'one':
-            anchor_feature = anchor[:, 0]
-            anchor_count = 1
-        elif self.contrast_mode == 'all':
-            anchor_feature = contrast_feature
-            anchor_count = contrast_count
-        else:
-            raise ValueError('Unknown mode: {}'.format(self.contrast_mode))
+        # compute the mask based on labels
+        if local_batch_size != self.last_local_batch_size:
+            mask = torch.eq(labels.view(-1, 1),
+                            all_labels.contiguous().view(1, -1)).float().to(device)
+            self.logits_mask = torch.scatter(
+                torch.ones_like(mask),
+                1,
+                torch.arange(mask.shape[0]).view(-1, 1).to(device),
+                0
+            )
+
+            self.last_local_batch_size = local_batch_size
+            self.mask = mask * self.logits_mask
+
+        mask = self.mask
 
         # compute logits
-        anchor_dot_contrast = torch.div(
-            torch.matmul(anchor_feature, contrast_feature.T),
-            self.temperature)
-        # for numerical stability
-        logits_max, _ = torch.max(anchor_dot_contrast, dim=1, keepdim=True)
-        logits = anchor_dot_contrast - logits_max.detach()
-        
-        # tile mask
-        mask = mask.repeat(anchor_count, contrast_count)
-        # mask-out self-contrast cases
-        logits_mask = torch.scatter(
-            torch.ones_like(mask),
-            1,
-            torch.arange(batch_size * anchor_count).view(-1, 1).to(device),
-            0
-        )
-        mask = mask * logits_mask
+        logits = torch.matmul(feats, all_feats.T) / self.temperature
+        logits = logits - (1 - self.logits_mask) * 1e9
 
-        #print(mask)
-        # compute log_prob
-        exp_logits = torch.exp(logits) * logits_mask
-        #log_prob = logits - torch.log(exp_logits.sum(1, keepdim=True))
-        log_prob = logits - torch.log(exp_logits.sum(1, keepdim=True) + 1e-6)
+        # optional: minus the largest logit to stablize logits
+        logits = stablize_logits(logits)
 
-        # compute mean of log-likelihood over positive
-        # modified to handle edge cases when there is no positive pair
-        # for an anchor point. 
-        # Edge case e.g.:- 
-        # features of shape: [4,1,...]
-        # labels:            [0,1,1,2]
-        # loss before mean:  [nan, ..., ..., nan] 
-        mask_pos_pairs = mask.sum(1)
-        mask_pos_pairs = torch.where(mask_pos_pairs < 1e-6, 1, mask_pos_pairs)
-        mean_log_prob_pos = (mask * log_prob).sum(1) / mask_pos_pairs
-
-        # loss
-        loss = - (self.temperature / self.base_temperature) * mean_log_prob_pos
-        loss = loss.view(anchor_count, batch_size).mean()
+        # compute ground-truth distribution
+        p = mask / mask.sum(1, keepdim=True).clamp(min=1.0)
+        loss = compute_cross_entropy(p, logits)
 
         return loss

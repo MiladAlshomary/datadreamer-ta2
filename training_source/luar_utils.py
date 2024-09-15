@@ -3,7 +3,6 @@ import shutil
 from sentence_transformers import SentenceTransformer
 from sentence_transformers.models import Transformer
 
-
 def fix_tokenizer(tokenizer):
     # Make the FastTokenizer savable
     def _override_save_pretrained(save_directory, **kwargs):

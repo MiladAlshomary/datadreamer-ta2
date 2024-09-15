@@ -11,7 +11,6 @@ from datadreamer import DataDreamer
 from datadreamer.steps import DataSource
 from transformers import TrainerCallback
 from sentence_transformers import losses
-from SupContrastLoss import SupConLoss
 from peft import LoraConfig
 from random import Random
 
@@ -147,21 +146,25 @@ def get_data_generator_for_supervised_contrastive_learning(path, fold, split, sp
         candidate_author_ids.add(author_id)
         author_documents[author_id].append(line['fullText'])
         author_candidate_documents[author_id].append(line['fullText'])
-    
-    # Convert to lists
-    query_author_ids = list(sorted(query_author_ids))
-    candidate_author_ids = list(sorted(candidate_author_ids))
 
-    # Split train into internal train/val splits for hyperparameter tuning / early-stopping
-    if split_percent is not None:
-        bigger_split_percent = max(split_percent, 1-split_percent)
-        index_of_split = 0 if bigger_split_percent == split_percent else 1
-        query_author_ids = np.split(query_author_ids, [int(len(query_author_ids)*bigger_split_percent)])[index_of_split]
-        candidate_author_ids = np.split(candidate_author_ids, [int(len(candidate_author_ids)*bigger_split_percent)])[index_of_split]
-    print("Dataset Statistics:", fold, split, split_percent, len(query_author_ids), len(candidate_author_ids))
+    #merge the two dicts together
+    all_authors_documents = {}
+    for a_id in all_author_ids:
+        all_authors_documents[a_id] = []
+        if a_id in author_query_documents:
+            all_authors_documents[a_id] += author_query_documents[a_id]
+        if a_id in author_candidate_documents:
+            all_authors_documents[a_id] += author_candidate_documents[a_id]
+
+    print('number of authors', len(all_authors_documents))
+    all_authors_documents = [x for x in all_authors_documents.items() if len(x[1]) > 3]
+    all_authors_documents = {x[0]: x[1] for x in all_authors_documents}
+    print('number of authors after filtering ', len(all_authors_documents))
 
     # Get total number of rows per epoch
-    total_num_rows = len(query_author_ids) * 2
+    total_num_rows = sum([len(x) for x in all_authors_documents.values()])
+
+    print("Dataset Statistics:", len(all_authors_documents), total_num_rows)
 
     # Create data generator
     def data_generator():
@@ -171,23 +174,19 @@ def get_data_generator_for_supervised_contrastive_learning(path, fold, split, sp
         
         # Create examples of anchors and positives from query-candidate pairs
         rows = []
-        for query_author_id in query_author_ids:
-            for d in author_query_documents[query_author_id]:
+        for author_id in all_authors_documents.keys():
+            for d in all_authors_documents[author_id]:
                 rows.append({
                     "anchors": d,
                     "others": "",
-                    "labels": all_author_ids_to_labels[query_author_id] # anchors' labels
-                })
-                
-            for d in author_candidate_documents[query_author_id]:
-                rows.append({
-                    "anchors": d,
-                    "others": "",
-                    "labels": all_author_ids_to_labels[query_author_id] # anchors' labels
+                    "labels": all_author_ids_to_labels[author_id] # anchors' labels
                 })
 
+        # Assert we have the right number of rows
+        assert len(rows) == total_num_rows
+
         # Shuffle and yield the rows
-        rand.shuffle(rows)
+        #rand.shuffle(rows)
         for row in rows:
             yield row
 

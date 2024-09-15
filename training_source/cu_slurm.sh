@@ -3,9 +3,9 @@
 #SBATCH --account=dsi            # The account name for the job.
 #SBATCH --job-name=pausit-training  # The job name.
 #SBATCH --output=penn_slurm_training.stdout
-#SBATCH --gres=gpu:2             # Request 1 gpu (Up to 2 gpus per GPU node)
+#SBATCH --gres=gpu:1             # Request 1 gpu (Up to 2 gpus per GPU node)
 #SBATCH --time=0-8:00           # The time the job will take to run in D-HH:MM
-#SBATCH --mem=128G
+#SBATCH --mem=64G
 
 
 # Run the program
