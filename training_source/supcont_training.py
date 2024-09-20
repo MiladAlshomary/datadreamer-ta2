@@ -26,7 +26,7 @@ def train_datadreamer_ta2(fold, output_folder, used_loss, luar_model_path='./rri
             trust_remote_code=True,
             device='cuda:0',
             dtype="bfloat16",
-            force=True,
+            force=False,
         )
 
         #loss = SupConLoss if used_loss=='SupConLoss' else losses.MultipleNegativesSymmetricRankingLoss
@@ -43,16 +43,16 @@ def train_datadreamer_ta2(fold, output_folder, used_loss, luar_model_path='./rri
                 validation_labels=dev_dataset.output["labels"],
                 epochs=epochs,
                 batch_size=batch_size,
-                eval_strategy='steps',
-                logging_strategy='steps',
-                save_strategy='steps',
-                save_steps=50,
+                eval_strategy='epoch',
+                logging_strategy='epoch',
+                save_strategy='epoch',
+                #save_steps=100,
                 save_total_limit=3,
-                logging_steps=50,
+                #logging_steps=100,
                 loss=loss,
-                learning_rate=0.0005,
+                learning_rate=0.0001,
                 early_stopping_threshold=0.001,
-                early_stopping_patience=5,
+                early_stopping_patience=3,
                 accelerator_config={
                     "dispatch_batches": False,
                 },
@@ -70,7 +70,7 @@ def train_datadreamer_ta2(fold, output_folder, used_loss, luar_model_path='./rri
                 epochs=epochs,    
                 batch_size=batch_size,
                 loss=loss,
-                learning_rate=0.0005,
+                learning_rate=0.0001,
                 early_stopping_threshold=0.001,
                 early_stopping_patience=5,
                 accelerator_config={

@@ -147,24 +147,16 @@ def get_data_generator_for_supervised_contrastive_learning(path, fold, split, sp
         author_documents[author_id].append(line['fullText'])
         author_candidate_documents[author_id].append(line['fullText'])
 
-    #merge the two dicts together
-    all_authors_documents = {}
-    for a_id in all_author_ids:
-        all_authors_documents[a_id] = []
-        if a_id in author_query_documents:
-            all_authors_documents[a_id] += author_query_documents[a_id]
-        if a_id in author_candidate_documents:
-            all_authors_documents[a_id] += author_candidate_documents[a_id]
 
-    print('number of authors', len(all_authors_documents))
-    all_authors_documents = [x for x in all_authors_documents.items() if len(x[1]) > 3]
-    all_authors_documents = {x[0]: x[1] for x in all_authors_documents}
-    print('number of authors after filtering ', len(all_authors_documents))
+    print('number of authors', len(author_documents))
+    author_documents = [x for x in author_documents.items() if len(x[1]) > 5]
+    author_documents = {x[0]: x[1] for x in author_documents}
+    print('number of authors after filtering ', len(author_documents))
 
     # Get total number of rows per epoch
-    total_num_rows = sum([len(x) for x in all_authors_documents.values()])
+    total_num_rows = sum([len(x) for x in author_documents.values()])
 
-    print("Dataset Statistics:", len(all_authors_documents), total_num_rows)
+    print("Dataset Statistics:", len(author_documents), total_num_rows)
 
     # Create data generator
     def data_generator():
@@ -174,8 +166,8 @@ def get_data_generator_for_supervised_contrastive_learning(path, fold, split, sp
         
         # Create examples of anchors and positives from query-candidate pairs
         rows = []
-        for author_id in all_authors_documents.keys():
-            for d in all_authors_documents[author_id]:
+        for author_id in author_documents.keys():
+            for d in author_documents[author_id]:
                 rows.append({
                     "anchors": d,
                     "others": "",
