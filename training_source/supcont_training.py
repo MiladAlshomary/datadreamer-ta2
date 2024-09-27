@@ -52,7 +52,7 @@ def train_datadreamer_ta2(fold, output_folder, used_loss, luar_model_path='./rri
                 loss=loss,
                 learning_rate=0.0001,
                 early_stopping_threshold=0.001,
-                early_stopping_patience=3,
+                early_stopping_patience=5,
                 accelerator_config={
                     "dispatch_batches": False,
                 },
