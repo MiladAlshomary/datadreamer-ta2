@@ -213,18 +213,20 @@ def get_performs_data_generator(path, split):
         print(json_file)
         for line in jsonlines.open(json_file):
             author_id = line['authorIDs'][0]
-            query_author_ids.add(author_id)
+            candidate_author_ids.add(author_id)
             author_documents[author_id].append(line['fullText'])
-            author_query_documents[author_id].append(line['fullText'])
+            author_candidate_documents[author_id].append(line['fullText'])
     
     # Convert to lists
     query_author_ids = list(sorted(query_author_ids))
     candidate_author_ids = list(sorted(candidate_author_ids))
 
-    print("Dataset Statistics:", split, len(query_author_ids), len(candidate_author_ids))
+    author_documents = {x[0]: x[1] for x in author_documents.items() if len(x[1]) > 1}
+    print("Dataset Statistics:", split, len(author_documents))
 
+    
     # Get total number of rows per epoch
-    total_num_rows = len(query_author_ids) * 2
+    total_num_rows = len(author_documents)
 
     # Create data generator
     def data_generator():
@@ -234,26 +236,15 @@ def get_performs_data_generator(path, split):
         
         # Create examples of anchors and positives from query-candidate pairs
         rows = []
-        for query_author_id in query_author_ids:
-            rows.append({
-                "anchors": rand.choice(author_query_documents[query_author_id]),
-                "positives": rand.choice(author_candidate_documents[query_author_id])
-            })
+        for author_id in author_documents:
+            if len(author_documents[author_id]) >1:
+                rows.append({
+                    "anchors": author_documents[author_id][0],
+                    "positives": author_documents[author_id][1]
+                })
+            # else:
+            #     print(author_id, ' has ', len(author_documents[author_id]))
 
-        # Create augmented examples of anchors and positives from candidate-candidate pairs
-        cc = 0
-        while cc < len(query_author_ids):
-            candidate_author_id = rand.choice(candidate_author_ids)
-            if candidate_author_id in query_author_ids or len(author_candidate_documents[candidate_author_id]) < 2:
-                continue
-            docs = author_candidate_documents[candidate_author_id].copy()
-            rand.shuffle(docs)
-            rows.append({
-                "anchors": docs[0],
-                "positives": docs[1],
-            })
-            cc += 1
-        
         # Assert we have the right number of rows
         assert len(rows) == total_num_rows
 
