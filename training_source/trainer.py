@@ -186,7 +186,7 @@ def get_data_generator_for_supervised_contrastive_learning(path, fold, split, sp
 
 def get_performs_data_generator(path, split):
     train_folder_path = path.replace('{split}', split)
-    
+
     # Create variables for train dataset
     author_documents = defaultdict(list) # Maps from an author's true ID to a list of all their documents
     author_query_documents = defaultdict(list) # Maps from an author's true ID to a list of their query documents
@@ -198,7 +198,7 @@ def get_performs_data_generator(path, split):
     
     # Read query documents
     #'/burg/dsi/users/ma4608/hiatus_performers_data/sadiri/*/{split}
-    for json_file in glob.glob(train_folder_path + '_queries.jsonl'):
+    for json_file in glob.glob(train_folder_path + '_queries_filtered.jsonl'):
         print(json_file)
         for line in jsonlines.open(json_file):
             author_id = line['authorIDs'][0]
@@ -209,7 +209,7 @@ def get_performs_data_generator(path, split):
     
 
     # Read candidate documents
-    for json_file in glob.glob(train_folder_path + '_candidates.jsonl'):
+    for json_file in glob.glob(train_folder_path + '_candidates_filtered.jsonl'):
         print(json_file)
         for line in jsonlines.open(json_file):
             author_id = line['authorIDs'][0]

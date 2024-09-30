@@ -16,4 +16,4 @@
 #export HF_HOME="./hiatus_huggingface_cache"
 #pip3 install -r requirements.txt
 #pip install datadreamer.dev==0.36
-jupyter notebook --no-browser --ip=$(hostname -i) --notebook-dir=/burg/dsi/users/ma4608
+jupyter notebook --no-browser --ip=$(hostname -i) --notebook-dir=/burg/old_dsi/users/ma4608
