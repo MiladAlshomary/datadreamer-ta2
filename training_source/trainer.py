@@ -122,10 +122,11 @@ def get_data_generator_for_combined_hrs(path, fold, split, split_percent=None):
     candidate_author_ids = set()
     
     # Get global ID mapping for authors
-    with open(os.path.join(train_folder_path, 'author-set-ids-map_P1_and_P2_combined.json'), 'r') as fp:
+    with open(os.path.join(train_folder_path, 'author-set-ids-map_P1_and_P2.json'), 'r') as fp:
         for k, v in json.load(fp).items():
+            #print(k)
             source = ast.literal_eval(k)[1]
-            if source == 'HRS1.5':
+            if source.startswith('HRS1'):
                 k = ast.literal_eval(ast.literal_eval(k)[0])[0]
             else:
                 k = ast.literal_eval(k)[0]
@@ -135,7 +136,7 @@ def get_data_generator_for_combined_hrs(path, fold, split, split_percent=None):
 
     # Read query documents
     for line in jsonlines.open(glob.glob(os.path.join(train_folder_path, '*_input_queries.jsonl'))[0]):
-        print(line.keys())
+        #print(line.keys())
         author_id = author_global_ids[line['authorIDs'][0]]
         query_author_ids.add(author_id)
         author_documents[author_id].append(line['fullText'])
