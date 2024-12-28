@@ -17,7 +17,8 @@ def fix_tokenizer(tokenizer):
 
 def load_luar_as_sentence_transformer(model_name_or_path, **kwargs):
     t_module = Transformer(model_name_or_path,
-        model_args={"trust_remote_code": True}
+        model_args={"trust_remote_code": True},
+        config_args={"trust_remote_code": True},
     )
     st = SentenceTransformer(
         None,
