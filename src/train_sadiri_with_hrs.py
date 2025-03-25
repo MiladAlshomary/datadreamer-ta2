@@ -82,9 +82,12 @@ def train_datadreamer_ta2_combined_hrs(fold, output_folder, used_loss, luar_mode
 
 output_path = '../output'
 # luar_model_path = '../output/sadiri_random_batch_creation_model_v4final_model'
+# luar_model_path = '../output/sadiri_full_training_v1final_model'
 luar_model_path = "../training_source/rrivera1849/LUAR-MUD"
 fold = "../data/hrs/english_TA2_p1_and_p2_{split}_20240207"
-model_op_dir = os.path.join(output_path, 'combined_hrs_tuned_v5')
+# model_op_dir = os.path.join(output_path, 'sadiri_v4_hrs_ta2p1p2_model_v1')
+# model_op_dir = os.path.join(output_path, 'sadiri_full_training_v1_hrs_ta2p1p2_model_v1')
+model_op_dir = os.path.join(output_path, 'luar_v1_hrs_ta2p1p2_model_v1')
 
 train_datadreamer_ta2_combined_hrs(
     fold=fold, 

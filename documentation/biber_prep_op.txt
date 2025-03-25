@@ -1,0 +1,677 @@
+(echo "source,doc,batch,min_author_docs_count,min_batch_authors_sample,nrows,unique_author_counts"; for file in *batch_01.jsonl; do nrows=$(wc -l < "$file"); unique_authors=$(grep -Po 'authorID":"[^"]*' "$file" | sort -u | wc -l); head -1 "$file" | python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["source"], obj["doc"], obj["batch"], obj["min_author_docs_count"], obj["min_batch_authors_sample"], sep=",", end="")'; echo ",$nrows,$unique_authors"; done) > batch_metadata_v2.csv
+
+(echo "filename,line_number,documentID,language"; \
+ for file in *.jsonl; do \
+   nl -ba "$file" | while read -r num line; do \
+     docid=$(echo "$line" | python -c 'import json,sys; print(json.load(sys.stdin).get("documentID",""))'); \
+     text=$(echo "$line" | python -c 'import json,sys; print(json.load(sys.stdin).get("fullText","").replace("\n"," "))'); \
+     lang=$(echo "$text" | ./fastText predict lid.176.bin - 2>/dev/null | sed 's/__label__//'); \
+     echo "$file,$num,$docid,$lang"; \
+   done; \
+ done) > output.csv
+
+
+ao3
+Dev Can Shape: (3076827, 14), Dev Que Shape: (37327, 14), Tes Can Shape: (6182027, 14), Tes Que Shape: (74653, 14), Tra Can Shape: (0, 0), Tra Que Shape: (0, 0)
+Combined Shape: (9370834, 14)
+Combined Shape for gte 70: (9370255, 16)
+Author Count Shape for gte 70: (111977, 2)
+Meged Author Docs Count for gte 70
+Output File for gte 70: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/ao3_gte70.jsonl
+Combined Shape for gte 250: (9324488, 16)
+Author Count Shape for gte 250: (111857, 2)
+Meged Author Docs Count for gte 250
+Output File for gte 250: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/ao3_gte250.jsonl
+
+gmane
+Dev Can Shape: (33538, 14), Dev Que Shape: (33538, 14), Tes Can Shape: (65102, 14), Tes Que Shape: (65103, 14), Tra Can Shape: (558926, 14), Tra Que Shape: (558918, 14)
+Combined Shape: (1315125, 14)
+Combined Shape for gte 70: (1038808, 16)
+Author Count Shape for gte 70: 617087
+Output File for gte 70: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/gmane_gte70.jsonl
+Combined Shape for gte 250: (92482, 16)
+Author Count Shape for gte 250: 82342
+Output File for gte 250: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/gmane_gte250.jsonl
+
+realnews
+Dev Can Shape: (10861, 14), Dev Que Shape: (10861, 14), Tes Can Shape: (21085, 14), Tes Que Shape: (21085, 14), Tra Can Shape: (181024, 14), Tra Que Shape: (181024, 14)
+Combined Shape: (425940, 14)
+Combined Shape for gte 70: (425938, 16)
+Author Count for gte 70: 212969
+Output File for gte 70: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/realnews_gte70.jsonl
+Combined Shape for gte 250: (385191, 16)
+Author Count for gte 250: 205640
+Output File for gte 250: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/realnews_gte250.jsonl
+
+back
+(681284, 7)
+Combined Shape for gte 70: (425612, 9)
+Author Count Shape for gte 70: 19259
+Output File for gte 70: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/back_gte70.jsonl
+Combined Shape for gte 250: (174977, 9)
+Author Count Shape for gte 70: 16528
+Output File for gte 250: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/back_gte250.jsonl
+
+reddit_corpus
+reddit_corpus Shape:(12290058, 17)
+Combined Shape for gte 70: (7552986, 17)
+Author Count Shape for gte 70: 2417978
+Output File for gte 70: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/reddit_corpus_gte70.jsonl
+Combined Shape for gte 250: (712381, 17)
+Author Count Shape for gte 250: 570267
+Output File for gte 250: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/reddit_corpus_gte250.jsonl
+
+bookcorpus_corpus
+bookcorpus_corpus Shape: (1276515, 17)
+Combined Shape for gte 70: (1276444, 17)
+Author Count Shape for gte 70: 66385
+Output File for gte 70: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/bookcorpus_corpus_gte70.jsonl
+Combined Shape for gte 250: (1275157, 17)
+Author Count Shape for gte 250: 66383
+Output File for gte 250: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/bookcorpus_corpus_gte250.jsonl
+
+
+#### Biber Language Detection
+back_gte250.jsonl
+back_gte70.jsonl
+bookcorpus_corpus_gte250.jsonl
+bookcorpus_corpus_gte70.jsonl
+gmane_gte250.jsonl
+gmane_gte70.jsonl
+realnews_gte250.jsonl
+realnews_gte70.jsonl
+reddit_corpus_gte250.jsonl
+reddit_corpus_gte70.jsonl
+
+d python biber_language_detection.py --input_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/ao3_gte250.jsonl' --output_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/ao3_gte250_v01.jsonl' --chunksize 50000
+d python biber_language_detection.py --input_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/ao3_gte70.jsonl' --output_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/ao3_gte70_v01.jsonl' --chunksize 50000
+d python biber_language_detection.py --input_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/back_gte250.jsonl' --output_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/back_gte250_v01.jsonl' --chunksize 50000
+d python biber_language_detection.py --input_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/back_gte70.jsonl' --output_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/back_gte70_v01.jsonl' --chunksize 50000
+d python biber_language_detection.py --input_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/bookcorpus_corpus_gte250.jsonl' --output_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/bookcorpus_corpus_gte250_v01.jsonl' --chunksize 50000
+d python biber_language_detection.py --input_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/bookcorpus_corpus_gte70.jsonl' --output_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/bookcorpus_corpus_gte70_v01.jsonl' --chunksize 50000
+d python biber_language_detection.py --input_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/gmane_gte250.jsonl' --output_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/gmane_gte250_v01.jsonl' --chunksize 50000
+d python biber_language_detection.py --input_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/gmane_gte70.jsonl' --output_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/gmane_gte70_v01.jsonl' --chunksize 50000
+d python biber_language_detection.py --input_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/realnews_gte250.jsonl' --output_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/realnews_gte250_v01.jsonl' --chunksize 50000
+d python biber_language_detection.py --input_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/realnews_gte70.jsonl' --output_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/realnews_gte70_v01.jsonl' --chunksize 50000
+d python biber_language_detection.py --input_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/reddit_corpus_gte250.jsonl' --output_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/reddit_corpus_gte250_v01.jsonl' --chunksize 50000
+d python biber_language_detection.py --input_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_raw/reddit_corpus_gte70.jsonl' --output_file_path '/data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/reddit_corpus_gte70_v01.jsonl' --chunksize 50000
+
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        source: gmane
+        doc: gte70
+        min_author_docs_count: 2
+        min_batch_authors_sample: 2000
+        source_doc_file_path: None
+     
+	Filtered Shape: (843442, 17)
+	Unique Authors Shape: (421721, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (4000, 17)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/gmane_gte70_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        source: gmane
+        doc: gte250
+        min_author_docs_count: 2
+        min_batch_authors_sample: 2000
+        source_doc_file_path: None
+     
+	Filtered Shape: (20280, 17)
+	Unique Authors Shape: (10140, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (4000, 17)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/gmane_gte250_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        source: realnews
+        doc: gte70
+        min_author_docs_count: 2
+        min_batch_authors_sample: 2000
+        source_doc_file_path: None
+     
+	Filtered Shape: (425938, 17)
+	Unique Authors Shape: (212969, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (4000, 17)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/realnews_gte70_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        source: realnews
+        doc: gte250
+        min_author_docs_count: 2
+        min_batch_authors_sample: 2000
+        source_doc_file_path: None
+     
+	Filtered Shape: (359102, 17)
+	Unique Authors Shape: (179551, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (4000, 17)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/realnews_gte250_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        source: bookcorpus_corpus
+        doc: gte70
+        min_author_docs_count: 10
+        min_batch_authors_sample: 2000
+        source_doc_file_path: None
+     
+	Filtered Shape: (1268550, 18)
+	Unique Authors Shape: (64916, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (36475, 18)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/bookcorpus_corpus_gte70_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        source: bookcorpus_corpus
+        doc: gte250
+        min_author_docs_count: 10
+        min_batch_authors_sample: 2000
+        source_doc_file_path: None
+     
+	Filtered Shape: (1264199, 18)
+	Unique Authors Shape: (64523, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (37555, 18)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/bookcorpus_corpus_gte250_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        source: reddit_corpus
+        doc: gte70
+        min_author_docs_count: 5
+        min_batch_authors_sample: 2000
+        source_doc_file_path: None
+     
+	Filtered Shape: (1434172, 18)
+	Unique Authors Shape: (286834, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (10000, 18)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/reddit_corpus_gte70_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        source: reddit_corpus
+        doc: gte250
+        min_author_docs_count: 5
+        min_batch_authors_sample: 2000
+        source_doc_file_path: None
+     
+	Filtered Shape: (5175, 18)
+	Unique Authors Shape: (1035, 1)
+	Authors Sample Shape: (1035, 1)
+	Merged Shape: (5175, 18)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/reddit_corpus_gte250_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        source: ao3
+        doc: gte70
+        min_author_docs_count: 10
+        min_batch_authors_sample: 2000
+        source_doc_file_path: None
+     
+	Filtered Shape: (9226699, 17)
+	Unique Authors Shape: (75111, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (246195, 17)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/ao3_gte70_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        source: ao3
+        doc: gte250
+        min_author_docs_count: 10
+        min_batch_authors_sample: 2000
+        source_doc_file_path: None
+     
+	Filtered Shape: (9180251, 17)
+	Unique Authors Shape: (74777, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (246198, 17)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/ao3_gte250_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        source: back
+        doc: gte70
+        min_author_docs_count: 10
+        min_batch_authors_sample: 2000
+        source_doc_file_path: None
+     
+	Filtered Shape: (377832, 9)
+	Unique Authors Shape: (8114, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (92826, 9)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/back_gte70_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        source: back
+        doc: gte250
+        min_author_docs_count: 10
+        min_batch_authors_sample: 2000
+        source_doc_file_path: None
+     
+	Filtered Shape: (136084, 9)
+	Unique Authors Shape: (4012, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (68240, 9)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/back_gte250_batch_01.jsonl
+
+
+
+
+v2 
+###################
+input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/back_gte250_v01.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/back_gte250_v02.jsonl
+        new_lang_col_name: language_fasttext_biber
+        author_docs_count_col_name: author_docs_count
+        en_lang_val_arr: ['en', 'eng_Latn'] 
+     
+Read input file to dataframe: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/back_gte250_v01.jsonl with shape: (174977, 11)
+Filtered out non english language documents, now with shape: (173598, 11)
+Output written to file: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/back_gte250_v02.jsonl
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/back_gte70_v01.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/back_gte70_v02.jsonl
+        new_lang_col_name: language_fasttext_biber
+        author_docs_count_col_name: author_docs_count
+        en_lang_val_arr: ['en', 'eng_Latn'] 
+     
+Read input file to dataframe: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/back_gte70_v01.jsonl with shape: (425612, 11)
+Filtered out non english language documents, now with shape: (421473, 11)
+Output written to file: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/back_gte70_v02.jsonl
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/bookcorpus_corpus_gte250_v01.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/bookcorpus_corpus_gte250_v02.jsonl
+        new_lang_col_name: language_fasttext_biber
+        author_docs_count_col_name: author_docs_count
+        en_lang_val_arr: ['en', 'eng_Latn'] 
+     
+Read input file to dataframe: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/bookcorpus_corpus_gte250_v01.jsonl with shape: (1275157, 19)
+Filtered out non english language documents, now with shape: (1203972, 19)
+Output written to file: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/bookcorpus_corpus_gte250_v02.jsonl
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/bookcorpus_corpus_gte70_v01.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/bookcorpus_corpus_gte70_v02.jsonl
+        new_lang_col_name: language_fasttext_biber
+        author_docs_count_col_name: author_docs_count
+        en_lang_val_arr: ['en', 'eng_Latn'] 
+     
+Read input file to dataframe: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/bookcorpus_corpus_gte70_v01.jsonl with shape: (1276444, 19)
+Filtered out non english language documents, now with shape: (1204999, 19)
+Output written to file: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/bookcorpus_corpus_gte70_v02.jsonl
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/gmane_gte250_v01.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/gmane_gte250_v02.jsonl
+        new_lang_col_name: language_fasttext_biber
+        author_docs_count_col_name: author_docs_count
+        en_lang_val_arr: ['en', 'eng_Latn'] 
+     
+Read input file to dataframe: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/gmane_gte250_v01.jsonl with shape: (92482, 18)
+Filtered out non english language documents, now with shape: (92306, 18)
+Output written to file: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/gmane_gte250_v02.jsonl
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/gmane_gte70_v01.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/gmane_gte70_v02.jsonl
+        new_lang_col_name: language_fasttext_biber
+        author_docs_count_col_name: author_docs_count
+        en_lang_val_arr: ['en', 'eng_Latn'] 
+     
+Read input file to dataframe: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/gmane_gte70_v01.jsonl with shape: (1038808, 18)
+Filtered out non english language documents, now with shape: (1036871, 18)
+Output written to file: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/gmane_gte70_v02.jsonl
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/realnews_gte250_v01.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/realnews_gte250_v02.jsonl
+        new_lang_col_name: language_fasttext_biber
+        author_docs_count_col_name: author_docs_count
+        en_lang_val_arr: ['en', 'eng_Latn'] 
+     
+Read input file to dataframe: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/realnews_gte250_v01.jsonl with shape: (385191, 18)
+Filtered out non english language documents, now with shape: (384239, 18)
+Output written to file: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/realnews_gte250_v02.jsonl
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/realnews_gte70_v01.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/realnews_gte70_v02.jsonl
+        new_lang_col_name: language_fasttext_biber
+        author_docs_count_col_name: author_docs_count
+        en_lang_val_arr: ['en', 'eng_Latn'] 
+     
+Read input file to dataframe: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/realnews_gte70_v01.jsonl with shape: (425938, 18)
+Filtered out non english language documents, now with shape: (424623, 18)
+Output written to file: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/realnews_gte70_v02.jsonl
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/reddit_corpus_gte250_v01.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/reddit_corpus_gte250_v02.jsonl
+        new_lang_col_name: language_fasttext_biber
+        author_docs_count_col_name: author_docs_count
+        en_lang_val_arr: ['en', 'eng_Latn'] 
+     
+Read input file to dataframe: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/reddit_corpus_gte250_v01.jsonl with shape: (712381, 19)
+Filtered out non english language documents, now with shape: (701876, 19)
+Output written to file: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/reddit_corpus_gte250_v02.jsonl
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/reddit_corpus_gte70_v01.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/reddit_corpus_gte70_v02.jsonl
+        new_lang_col_name: language_fasttext_biber
+        author_docs_count_col_name: author_docs_count
+        en_lang_val_arr: ['en', 'eng_Latn'] 
+     
+Read input file to dataframe: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/reddit_corpus_gte70_v01.jsonl with shape: (7552986, 19)
+Filtered out non english language documents, now with shape: (7459979, 19)
+Output written to file: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/reddit_corpus_gte70_v02.jsonl
+
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/ao3_gte250_v01.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/ao3_gte250_v02.jsonl
+        new_lang_col_name: language_fasttext_biber
+        author_docs_count_col_name: author_docs_count
+        en_lang_val_arr: ['en', 'eng_Latn']
+        chunksize: 100000
+    
+Total lines in file: 9324488, Total chunks (approx.): 94
+First pass: Counting docs: 100%|██████████| 94/94 [10:31<00:00,  6.72s/chunk]
+Global author counts computed.
+Second pass: Processing chunks: 100%|██████████| 94/94 [20:05<00:00, 12.82s/chunk]
+Output written to file: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/ao3_gte250_v02.jsonl
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/ao3_gte70_v01.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/ao3_gte70_v02.jsonl
+        new_lang_col_name: language_fasttext_biber
+        author_docs_count_col_name: author_docs_count
+        en_lang_val_arr: ['en', 'eng_Latn']
+        chunksize: 100000
+    
+Total lines in file: 9370255, Total chunks (approx.): 94
+First pass: Counting docs: 100%|██████████| 94/94 [10:29<00:00,  6.69s/chunk]
+Global author counts computed.
+Second pass: Processing chunks: 100%|██████████| 94/94 [20:06<00:00, 12.83s/chunk]
+Output written to file: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/ao3_gte70_v02.jsonl
+
+
+Batch Creation
+#################
+
+Called batch_create_source_doc function with the following parameters:
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/back_gte250_v02.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/back_gte250_batch_01.jsonl
+        source: back_v02_biber
+        doc: gte250 
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        min_author_docs_count: 10
+        min_batch_authors_sample: 2000
+        clip_authors_docs_count: 15
+     
+	Filtered Shape: (134854, 11)
+	Unique Authors Shape: (3976, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (66552, 11)
+	After clipping: (27877, 11)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/back_gte250_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/back_gte70_v02.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/back_gte70_batch_01.jsonl
+        source: back_v02_biber
+        doc: gte70 
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        min_author_docs_count: 10
+        min_batch_authors_sample: 2000
+        clip_authors_docs_count: 15
+     
+	Filtered Shape: (373756, 11)
+	Unique Authors Shape: (8027, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (91009, 11)
+	After clipping: (28039, 11)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/back_gte70_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/realnews_gte250_v02.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/realnews_gte250_batch_01.jsonl
+        source: realnews_v02_biber
+        doc: gte250 
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        min_author_docs_count: 2
+        min_batch_authors_sample: 2000
+        clip_authors_docs_count: 15
+     
+	Filtered Shape: (357974, 18)
+	Unique Authors Shape: (178987, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (4000, 18)
+	After clipping: (4000, 18)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/realnews_gte250_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/realnews_gte70_v02.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/realnews_gte70_batch_01.jsonl
+        source: realnews_v02_biber
+        doc: gte70 
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        min_author_docs_count: 2
+        min_batch_authors_sample: 2000
+        clip_authors_docs_count: 15
+     
+	Filtered Shape: (423936, 18)
+	Unique Authors Shape: (211968, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (4000, 18)
+	After clipping: (4000, 18)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/realnews_gte70_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/bookcorpus_corpus_gte250_v02.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/bookcorpus_corpus_gte250_batch_01.jsonl
+        source: bookcorpus_corpus_v02_biber
+        doc: gte250 
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        min_author_docs_count: 10
+        min_batch_authors_sample: 2000
+        clip_authors_docs_count: 15
+     
+	Filtered Shape: (1145337, 19)
+	Unique Authors Shape: (56514, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (42166, 19)
+	After clipping: (23106, 19)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/bookcorpus_corpus_gte250_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/bookcorpus_corpus_gte70_v02.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/bookcorpus_corpus_gte70_batch_01.jsonl
+        source: bookcorpus_corpus_v02_biber
+        doc: gte70 
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        min_author_docs_count: 10
+        min_batch_authors_sample: 2000
+        clip_authors_docs_count: 15
+     
+	Filtered Shape: (1148320, 19)
+	Unique Authors Shape: (56780, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (39709, 19)
+	After clipping: (22930, 19)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/bookcorpus_corpus_gte70_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/reddit_corpus_gte250_v02.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/reddit_corpus_gte250_batch_01.jsonl
+        source: reddit_corpus_v02_biber
+        doc: gte250 
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        min_author_docs_count: 5
+        min_batch_authors_sample: 2000
+        clip_authors_docs_count: 15
+     
+	Filtered Shape: (4970, 19)
+	Unique Authors Shape: (994, 1)
+	Authors Sample Shape: (994, 1)
+	Merged Shape: (4970, 19)
+	After clipping: (4970, 19)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/reddit_corpus_gte250_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/reddit_corpus_gte70_v02.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/reddit_corpus_gte70_batch_01.jsonl
+        source: reddit_corpus_v02_biber
+        doc: gte70 
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        min_author_docs_count: 5
+        min_batch_authors_sample: 2000
+        clip_authors_docs_count: 15
+     
+	Filtered Shape: (1383657, 19)
+	Unique Authors Shape: (276731, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (10000, 19)
+	After clipping: (10000, 19)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/reddit_corpus_gte70_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/gmane_gte250_v02.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/gmane_gte250_batch_01.jsonl
+        source: gmane_v02_biber
+        doc: gte250 
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        min_author_docs_count: 2
+        min_batch_authors_sample: 2000
+        clip_authors_docs_count: 15
+     
+	Filtered Shape: (20202, 18)
+	Unique Authors Shape: (10101, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (4000, 18)
+	After clipping: (4000, 18)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/gmane_gte250_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/gmane_gte70_v02.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/gmane_gte70_batch_01.jsonl
+        source: gmane_v02_biber
+        doc: gte70 
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        min_author_docs_count: 2
+        min_batch_authors_sample: 2000
+        clip_authors_docs_count: 15
+     
+	Filtered Shape: (840876, 18)
+	Unique Authors Shape: (420438, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (4000, 18)
+	After clipping: (4000, 18)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/gmane_gte70_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/ao3_gte250_v02.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/ao3_gte250_batch_01.jsonl
+        source: ao3_v02_biber
+        doc: gte250 
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        min_author_docs_count: 10
+        min_batch_authors_sample: 2000
+        clip_authors_docs_count: 15
+     
+	Filtered Shape: (9177894, 18)
+	Unique Authors Shape: (74753, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (244242, 18)
+	After clipping: (29092, 18)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/ao3_gte250_batch_01.jsonl
+
+
+Called batch_create_source_doc function with the following parameters:
+
+        input_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/all_data_prep/ao3_gte70_v02.jsonl
+        output_file_path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/ao3_gte70_batch_01.jsonl
+        source: ao3_v02_biber
+        doc: gte70 
+        batch_from_range: 1
+        batch_to_range_exclusive: 2 
+        min_author_docs_count: 10
+        min_batch_authors_sample: 2000
+        clip_authors_docs_count: 15
+     
+	Filtered Shape: (9224110, 18)
+	Unique Authors Shape: (75082, 1)
+	Authors Sample Shape: (2000, 1)
+	Merged Shape: (241318, 18)
+	After clipping: (29155, 18)
+Output File: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/batch_01_20250314/ao3_gte70_batch_01.jsonl

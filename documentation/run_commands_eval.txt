@@ -1,0 +1,115 @@
+TA2 Evaluation
+1. LoRA Sadiri + HRS - sadiri_random_batch_creation_model_v4final_model, sadiri_v4_hrs_ta2p1p2_model_v1/luar-trainer/_model/
+2. LoRA HRS - LUAR-MUD, luar_v1_hrs_ta2p1p2_model_v1/luar-trainer/_model/ 
+3. Sadiri full trained + LoRA HRS - sadiri_full_training_v1final_model, sadiri_full_training_v1_hrs_ta2p1p2_model_v1/luar-trainer/_model/
+
+mkdir -p /data/araghavan/HIATUS/datadreamer-ta2/eval/2025_01_08_deadline/system_1_sadiri_lora_hrs_lora/sadiri_v4_hrs_ta2p1p2_model_v1_checkpoint
+cd /data/araghavan/HIATUS/datadreamer-ta2/eval/2025_01_08_deadline/system_1_sadiri_lora_hrs_lora
+cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_random_batch_creation_model_v4final_model /data/araghavan/HIATUS/datadreamer-ta2/eval/2025_01_08_deadline/system_1_sadiri_lora_hrs_lora
+cp /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v4_hrs_ta2p1p2_model_v1/luar-trainer/_model/* /data/araghavan/HIATUS/datadreamer-ta2/eval/2025_01_08_deadline/system_1_sadiri_lora_hrs_lora/sadiri_v4_hrs_ta2p1p2_model_v1_checkpoint/
+ 
+mkdir -p /data/araghavan/HIATUS/datadreamer-ta2/eval/2025_01_08_deadline/system_2_hrs_lora/luar_v1_hrs_ta2p1p2_model_v1_checkpoint
+cd /data/araghavan/HIATUS/datadreamer-ta2/eval/2025_01_08_deadline/system_2_hrs_lora
+cp -r /data/araghavan/HIATUS/datadreamer-ta2/training_source/rrivera1849/LUAR-MUD /data/araghavan/HIATUS/datadreamer-ta2/eval/2025_01_08_deadline/system_2_hrs_lora
+cp /data/araghavan/HIATUS/datadreamer-ta2/output/luar_v1_hrs_ta2p1p2_model_v1/luar-trainer/_model/* /data/araghavan/HIATUS/datadreamer-ta2/eval/2025_01_08_deadline/system_2_hrs_lora/luar_v1_hrs_ta2p1p2_model_v1_checkpoint
+
+mkdir -p /data/araghavan/HIATUS/datadreamer-ta2/eval/2025_01_08_deadline/system_3_sadiri_full_hrs_lora/sadiri_full_training_v1_hrs_ta2p1p2_model_v1_checkpoint
+cd /data/araghavan/HIATUS/datadreamer-ta2/eval/2025_01_08_deadline/system_3_sadiri_full_hrs_lora/
+cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_full_training_v1final_model /data/araghavan/HIATUS/datadreamer-ta2/eval/2025_01_08_deadline/system_3_sadiri_full_hrs_lora
+cp /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_full_training_v1_hrs_ta2p1p2_model_v1/luar-trainer/_model/* /data/araghavan/HIATUS/datadreamer-ta2/eval/2025_01_08_deadline/system_3_sadiri_full_hrs_lora/sadiri_full_training_v1_hrs_ta2p1p2_model_v1_checkpoint
+
+
+Scores:
+3 >> 2 >> 1
+
+We Submitted 3, 1
+
+Merged model of first stage (when trained on Sadiri) [Goes to LUAR MUD folder]
+LoRA adaptor in the second stage (when trained on HRS) [Goes to checkpoint folder]
+
+
+
+Baseline
+python -u main.py  --input-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24/HRS_evaluation_samples/HRS2_english_medium/TA2/HRS2_english_medium_sample-0_crossGenre/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/luar_baseline/" --ground-truth-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24/HRS_evaluation_samples/HRS2_english_medium/TA2/HRS2_english_medium_sample-0_crossGenre/groundtruth/"  --run-id 1 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+
+/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24/HRS_evaluation_samples/HRS2_english_medium/TA2/HRS2_english_medium_sample-0_crossGenre/data/
+
+Sadiri + HRS
+python -u main.py  --input-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24/HRS_evaluation_samples/HRS2_english_medium/TA2/HRS2_english_medium_sample-0_crossGenre/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/test_TA2_data_op_sadiri_random_batch_creation_model_v4_combined_hrs_tuned/" --ground-truth-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24/HRS_evaluation_samples/HRS2_english_medium/TA2/HRS2_english_medium_sample-0_crossGenre/groundtruth/"  --run-id 1 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+
+
+Sadiri Only v2
+python -u main.py  --input-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24/HRS_evaluation_samples/HRS2_english_medium/TA2/HRS2_english_medium_sample-0_crossGenre/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/test_TA2_data_op_sadiri_random_batch_creation_model_v2/" --ground-truth-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24/HRS_evaluation_samples/HRS2_english_medium/TA2/HRS2_english_medium_sample-0_crossGenre/groundtruth/"  --run-id 2 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+
+Sadiri Only v4
+python -u main.py  --input-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24/HRS_evaluation_samples/HRS2_english_medium/TA2/HRS2_english_medium_sample-0_crossGenre/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/test_TA2_data_op_sadiri_random_batch_creation_model_v4/" --ground-truth-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24/HRS_evaluation_samples/HRS2_english_medium/TA2/HRS2_english_medium_sample-0_crossGenre/groundtruth/"  --run-id 3 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+
+HRS Only v5
+python -u main.py  --input-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24/HRS_evaluation_samples/HRS2_english_medium/TA2/HRS2_english_medium_sample-0_crossGenre/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/test_TA2_data_op_combined_hrs_tuned_v5/" --ground-truth-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24/HRS_evaluation_samples/HRS2_english_medium/TA2/HRS2_english_medium_sample-0_crossGenre/groundtruth/"  --run-id 4 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+
+<## k-fold-cross-validation splits with same test set>
+train_eval_k_fold - Sadiri + hrs fine tuning
+python train_eval_k_fold.py --train-model-path "/data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_random_batch_creation_model_v4final_model" --train-fold-path "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/english_crossGenre_092424_kf_fold_splits_qc/crossGenre/" --train-model-output-dir "/data/araghavan/HIATUS/datadreamer-ta2/output/hrs_trained_k_fold_models" --eval-trained-model-checkpoint-dir "/data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint" --eval-main-script-path "/data/araghavan/HIATUS/pausit-eval-ta2/main.py" --eval-output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/english_crossGenre_092424_kf_fold_splits_qc_outputs" --eval-ta1-approach "datadreamer_lora" --eval-ta2-approach "baseline" --eval-language "eng"
+
+Op:
+/data/araghavan/HIATUS/pausit-eval-ta2/data/english_crossGenre_092424_kf_fold_splits_qc_outputs/run_20241223_103554/aggregated_results.json
+
+train_eval_k_fold - hrs fine tuning only
+python train_eval_k_fold.py --train-model-path "/data/araghavan/HIATUS/datadreamer-ta2/training_source/rrivera1849/LUAR-MUD" --train-fold-path "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/english_crossGenre_092424_kf_fold_splits_qc/crossGenre/" --train-model-output-dir "/data/araghavan/HIATUS/datadreamer-ta2/output/hrs_trained_k_fold_models" --eval-trained-model-checkpoint-dir "/data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint" --eval-main-script-path "/data/araghavan/HIATUS/pausit-eval-ta2/main.py" --eval-output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/english_crossGenre_092424_kf_fold_splits_qc_outputs" --eval-ta1-approach "datadreamer_lora" --eval-ta2-approach "baseline" --eval-language "eng"
+
+Op:
+/data/araghavan/HIATUS/pausit-eval-ta2/data/english_crossGenre_092424_kf_fold_splits_qc_outputs/run_20241223_104312/aggregated_results.json
+
+HRS Only - k fold test
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/english_crossGenre_092424_kf_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/english_crossGenre_092424_kf_fold_splits_qc_outputs/k_fold_test_baseline_luar_20241223_104810/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/english_crossGenre_092424_kf_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 5 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+
+<copy luar-trainer/_model checkpoint to sivs/datadreamer_lora/checkpoint dir>
+Sadiri Only - k folds
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/english_crossGenre_092424_kf_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/test_TA2_data_op_sadiri_random_batch_creation_model_v4_20241223_114142/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/english_crossGenre_092424_kf_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 7 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+
+
+<## 5-fold-random splits with different test set>
+train_eval_k_fold - Sadiri + hrs fine tuning
+python train_eval_k_fold.py --train-model-path "/data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_random_batch_creation_model_v4final_model" --train-fold-path "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/" --train-model-output-dir "/data/araghavan/HIATUS/datadreamer-ta2/output/hrs_trained_5_folds_random_models" --eval-trained-model-checkpoint-dir "/data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint" --eval-main-script-path "/data/araghavan/HIATUS/pausit-eval-ta2/main.py" --eval-output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/nikita_direct_splits_5_random_fold_splits_qc_outputs" --eval-ta1-approach "datadreamer_lora" --eval-ta2-approach "baseline" --eval-language "eng"
+
+Op:
+/data/araghavan/HIATUS/pausit-eval-ta2/data/nikita_direct_splits_5_random_fold_splits_qc_outputs/run_20241228_162055_sad_hrs/aggregated_results.json
+
+train_eval_k_fold - hrs fine tuning only
+python train_eval_k_fold.py --train-model-path "/data/araghavan/HIATUS/datadreamer-ta2/training_source/rrivera1849/LUAR-MUD" --train-fold-path "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/" --train-model-output-dir "/data/araghavan/HIATUS/datadreamer-ta2/output/hrs_trained_5_folds_random_models" --eval-trained-model-checkpoint-dir "/data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint" --eval-main-script-path "/data/araghavan/HIATUS/pausit-eval-ta2/main.py" --eval-output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/nikita_direct_splits_5_random_fold_splits_qc_outputs" --eval-ta1-approach "datadreamer_lora" --eval-ta2-approach "baseline" --eval-language "eng"
+
+Op:
+/data/araghavan/HIATUS/pausit-eval-ta2/data/nikita_direct_splits_5_random_fold_splits_qc_outputs/run_20241228_162846_hrs/aggregated_results.json
+
+HRS Only - k fold test
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_baseline_luar_20241223_104810/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 5 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_2/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_baseline_luar_20241223_104811/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_2/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 6 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_3/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_baseline_luar_20241223_104812/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_3/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 7 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_4/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_baseline_luar_20241223_104813/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_4/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 8 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_5/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_baseline_luar_20241223_104814/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_5/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 9 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+
+Op: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/5_random_splits_hrs_only_eval_logs_20241228173030.txt
+
+<copy luar-trainer/_model checkpoint to sivs/datadreamer_lora/checkpoint dir>
+cp ../datadreamer-ta2/output/sadiri_random_batch_creation_model_v4/luar-trainer/_model/* SIVs/datadreamer_lora/checkpoint/
+Sadiri Only - k folds
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/test_TA2_data_op_sadiri_random_batch_creation_model_v4_20241228_174001/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 10 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_2/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/test_TA2_data_op_sadiri_random_batch_creation_model_v4_20241228_174002/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_2/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 11 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_3/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/test_TA2_data_op_sadiri_random_batch_creation_model_v4_20241228_174003/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_3/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 12 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_4/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/test_TA2_data_op_sadiri_random_batch_creation_model_v4_20241228_174004/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_4/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 13 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_5/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/test_TA2_data_op_sadiri_random_batch_creation_model_v4_20241228_174005/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_5/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 14 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+
+Op: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/5_random_splits_sadiri_only_eval_logs_20241228173030.txt
+
+
+<## 5-fold-random splits with different test set>
+train_eval_k_fold - Sadiri Full Training + hrs fine tuning
+python train_eval_k_fold.py --train-model-path "/data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_full_training_v1final_model" --train-fold-path "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/" --train-model-output-dir "/data/araghavan/HIATUS/datadreamer-ta2/output/hrs_trained_5_folds_sadiri_full_trained_v1" --eval-trained-model-checkpoint-dir "/data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint" --eval-main-script-path "/data/araghavan/HIATUS/pausit-eval-ta2/main.py" --eval-output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/nikita_direct_splits_5_random_fold_splits_qc_outputs_sadiri_full_training_v1" --eval-ta1-approach "datadreamer_lora" --eval-ta2-approach "baseline" --eval-language "eng"
+
+Op: 
+/data/araghavan/HIATUS/pausit-eval-ta2/data/nikita_direct_splits_5_random_fold_splits_qc_outputs_sadiri_full_training_v1/run_20250108_033342/aggregated_results.json
+
+<copy luar-trainer/_model checkpoint to sivs/datadreamer_lora/checkpoint dir>
+cp ../datadreamer-ta2/output/sadiri_full_training_v1/luar-trainer/_model/* SIVs/datadreamer_lora/checkpoint/
+Sadiri Only - k folds
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/test_TA2_data_op_sadiri_random_batch_creation_full_model_training_v1_20250108_041800/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 11 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
