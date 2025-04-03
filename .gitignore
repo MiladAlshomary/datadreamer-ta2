@@ -4,3 +4,6 @@ langdetection/
 output/
 training_source/rrivera1849/
 src/__pycache__/
+src/models--sentence-transformers--all-mpnet-base-v2/
+src/sentence-transformers/
+src/.locks/

@@ -113,3 +113,46 @@ Op:
 cp ../datadreamer-ta2/output/sadiri_full_training_v1/luar-trainer/_model/* SIVs/datadreamer_lora/checkpoint/
 Sadiri Only - k folds
 python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/pausit-eval-ta2/data/hrs_release_11-22-24_outputs/test_TA2_data_op_sadiri_random_batch_creation_full_model_training_v1_20250108_041800/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 11 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+
+
+
+
+###### Hard Batching Techniques
+
+
+## Anchor Positive File, Random Batching
+python train_luar_on_sadiri_batchingvariations.py \
+    --train_file_path "../data/ta2_jan_2025_trian_data/anchor_pos_train_sadiri_luarmudsbertamllv2.jsonl" \
+    --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
+    --type_ "get_anchorpos_random_batches" \
+    --model_op_dir_name "sadiri_anchorpos_random_batch_v001"
+
+## RankingLoss, Random Hard Batching
+python train_luar_on_sadiri_batchingvariations.py \
+    --train_file_path "../data/ta2_jan_2025_trian_data/hard_batching_dataset_luaremb_wo_ao3_filtered/train_sadiri_hard_batches_v001.jsonl" \
+    --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
+    --type_ "anchorpos_rankingloss_hardbatches" \
+    --model_op_dir_name "sadiri_hardpos_rankingloss_random_hardbatching_v001"
+
+<copy lora checkpoint to SIVs datadreamer checkpoint:>
+    cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_hardpos_rankingloss_random_hardbatching_v001/20250402_193508/luar-trainer/_model /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+
+<run eval command in pausit-eval-ta2 repo>
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250403_001/01" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 5 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_2/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250403_001/02" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_2/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 6 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_3/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250403_001/03" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_3/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 7 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_4/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250403_001/04" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_4/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 8 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_5/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250403_001/05" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_5/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 9 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+<see final stats in /data/araghavan/HIATUS/datadreamer-ta2/documentation/run_commands_eval_hardbatching_ops.txt>
+
+## Anchor Positive File, Hard Mix Batching
+CUDA_VISIBLE_DEVICES=2 python train_luar_on_sadiri_hardmixbatching.py \
+    --train_file_path "../data/ta2_jan_2025_trian_data/anchor_pos_train_sadiri_luarmudsbertamllv2.jsonl" \
+    --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
+    --type_ "get_anchorpos_hardmix_batches" \
+    --model_op_dir_name "sadiri_anchorpos_hardmix_batch_v001" \
+    --sem_sim_threshold 0.1 --sty_sim_threshold 0.2
+
+## Sadiri Filtered Original File, Random Batching - sadiri_filtered_org_random_batching_v001
+<ensure the values are changed in file: 
+python train_luar_on_sadiri.py

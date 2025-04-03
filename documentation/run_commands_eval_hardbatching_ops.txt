@@ -1,0 +1,118 @@
+## RankingLoss, Random Hard Batching - sadiri_hardpos_rankingloss_random_hardbatching_v001
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250403_001/01" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 5 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_2/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250403_001/02" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_2/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 6 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_3/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250403_001/03" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_3/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 7 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_4/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250403_001/04" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_4/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 8 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_5/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250403_001/05" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_5/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 9 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+
+Fold 1:
+Area Under ROC Curve	0.696614
+partial Area Under ROC Curve	0.555467
+Precision	0.055556
+Recall	0.071429
+F1	0.062500
+Equal Error Rate	0.357139
+Detection Cost Function	0.889002
+TAR@0.05	0.392857
+
+Fold 2:
+Area Under ROC Curve	0.783926
+partial Area Under ROC Curve	0.593455
+Precision	0.100000
+Recall	0.121212
+F1	0.109589
+Equal Error Rate	0.272734
+Detection Cost Function	0.801065
+TAR@0.05	0.363636
+
+Fold 3:
+Area Under ROC Curve	0.684179
+partial Area Under ROC Curve	0.522488
+Precision	0.000000
+Recall	0.000000
+F1	0.000000
+Equal Error Rate	0.344817
+Detection Cost Function	0.975438
+TAR@0.05	0.241379
+
+Fold 4:
+Area Under ROC Curve	0.658792
+partial Area Under ROC Curve	0.533642
+Precision	0.000000
+Recall	0.000000
+F1	0.000000
+Equal Error Rate	0.344834
+Detection Cost Function	0.935390
+TAR@0.05	0.241379
+
+Fold 5:
+Area Under ROC Curve	0.807391
+partial Area Under ROC Curve	0.575069
+Precision	0.052632
+Recall	0.083333
+F1	0.064516
+Equal Error Rate	0.291663
+Detection Cost Function	0.819916
+TAR@0.05	0.375000
+
+Average:
+
+
+## Baseline LUAR
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_baseline_luar_20250403_001/01" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 5 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_2/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_baseline_luar_20250403_001/02" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_2/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 6 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_3/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_baseline_luar_20250403_001/03" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_3/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 7 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_4/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_baseline_luar_20250403_001/04" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_4/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 8 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_5/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_baseline_luar_20250403_001/05" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_5/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 9 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+
+Fold 1:
+Area Under ROC Curve	0.821412
+partial Area Under ROC Curve	0.519043
+Precision	0.000000
+Recall	0.000000
+F1	0.000000
+Equal Error Rate	0.219502
+Detection Cost Function	0.875119
+TAR@0.05	0.321429
+
+Fold 2:
+Area Under ROC Curve	0.909256
+partial Area Under ROC Curve	0.534383
+Precision	0.000000
+Recall	0.000000
+F1	0.000000
+Equal Error Rate	0.158029
+Detection Cost Function	0.775764
+TAR@0.05	0.515152
+
+Fold 3:
+Area Under ROC Curve	0.774613
+partial Area Under ROC Curve	0.519219
+Precision	0.000000
+Recall	0.000000
+F1	0.000000
+Equal Error Rate	0.310340
+Detection Cost Function	0.972445
+TAR@0.05	0.172414
+
+Fold 4:
+Area Under ROC Curve	0.868605
+partial Area Under ROC Curve	0.510778
+Precision	0.000000
+Recall	0.000000
+F1	0.000000
+Equal Error Rate	0.241381
+Detection Cost Function	0.943548
+TAR@0.05	0.344828
+
+Fold 5:
+Area Under ROC Curve	0.809963
+partial Area Under ROC Curve	0.504873
+Precision	0.000000
+Recall	0.000000
+F1	0.000000
+Equal Error Rate	0.243172
+Detection Cost Function	0.953500
+TAR@0.05	0.291667
+
+Average:

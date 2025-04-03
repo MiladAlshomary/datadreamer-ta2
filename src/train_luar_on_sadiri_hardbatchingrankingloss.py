@@ -1,11 +1,11 @@
-from sadiri_training import get_performs_data_generator, EpochTrackerCallback, LoraConfig, get_luar_trainer, DataSource, DataDreamer, losses, get_performs_data_generator_random_batches
+from sadiri_training import get_performs_data_generator, EpochTrackerCallback, LoraConfig, get_luar_trainer, DataSource, DataDreamer, losses, get_performs_data_generator_random_batches, get_sadiri_batching_for_rankingloss
 from SupContrastLoss import MultiPosConLoss
 from RankingLoss import MultipleNegativesSymmetricRankingLoss
 import os
 
-def train_datadreamer_ta2__on_performers_data(fold, output_folder, used_loss, luar_model_path='./rrivera1849', batch_size=128, epochs=25):
-    train_num_rows, train_data_generator = get_performs_data_generator_random_batches(fold, "train")
-    dev_num_rows, dev_data_generator = get_performs_data_generator_random_batches(fold, "dev")
+def train_datadreamer_ta2__on_performers_data_with_hardbatch(fold, output_folder, used_loss, luar_model_path='./rrivera1849', batch_size=128, epochs=25):
+    train_num_rows, train_data_generator = get_sadiri_batching_for_rankingloss(fold, "train")
+    dev_num_rows, dev_data_generator = get_sadiri_batching_for_rankingloss(fold, "dev")
     # train_num_rows, train_data_generator = get_performs_data_generator(fold, "train")
     # dev_num_rows, dev_data_generator = get_performs_data_generator(fold, "dev")
 
@@ -72,12 +72,13 @@ luar_model_path = '../training_source/rrivera1849/LUAR-MUD'
 # luar_model_path = '../training_source/LUAR-MUD'
 # luar_model_path = 'rrivera1849/LUAR-MUD'
 # fold = "../data/sadiri/reddit/{split}"
-fold = "../data/ta2_jan_2025_trian_data/{split}_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl"
-model_op_dir = os.path.join(output_path, 'sadiri_filtered_org_random_batching_v001')
+fold = "/data/araghavan/HIATUS/datadreamer-ta2/data/ta2_jan_2025_trian_data/hard_batching_dataset_luaremb_wo_ao3_filtered/{split}_sadiri_hard_batches_v001.jsonl"
+# fold = "../data/ta2_jan_2025_trian_data/{split}_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl"
+model_op_dir = os.path.join(output_path, 'sadiri_hardbatching_rankingloss_wo_ao3_filtered_model_v001')
 # model_op_dir = os.path.join(output_path, 'sadiri_random_batch_creation_model_v3_10epoch')
 
 
-train_datadreamer_ta2__on_performers_data(
+train_datadreamer_ta2__on_performers_data_with_hardbatch(
     fold=fold, 
     output_folder=model_op_dir, 
     used_loss='MultipleNegativesSymmetricRankingLoss', # dummy

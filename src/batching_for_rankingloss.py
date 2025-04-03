@@ -191,17 +191,17 @@ class HardBatchCreator:
         return batches
 
 
-data_by_author = {}
-with jsonlines.open('/content/author/2_reduced_compound_subreddit_hrs_redacted.jsonl') as reader:
-    for obj in reader:
-        # "authorIDs" as key
-        for author in obj['authorIDs']:
-            # documents list as value
-            if author not in data_by_author:
-                data_by_author[author] = []
-            data_by_author[author].append(obj['fullText'])
+# data_by_author = {}
+# with jsonlines.open('/content/author/2_reduced_compound_subreddit_hrs_redacted.jsonl') as reader:
+#     for obj in reader:
+#         # "authorIDs" as key
+#         for author in obj['authorIDs']:
+#             # documents list as value
+#             if author not in data_by_author:
+#                 data_by_author[author] = []
+#             data_by_author[author].append(obj['fullText'])
 
-# I will only use first 100 authors here
-data_by_author = dict(list(data_by_author.items())[:100])
-creator = HardBatchCreator(data_by_author, batch_size=32, ceiling_threshold=0.2)
-batches = creator.create_batches_faiss()
+# # I will only use first 100 authors here
+# data_by_author = dict(list(data_by_author.items())[:100])
+# creator = HardBatchCreator(data_by_author, batch_size=32, ceiling_threshold=0.2)
+# batches = creator.create_batches_faiss()

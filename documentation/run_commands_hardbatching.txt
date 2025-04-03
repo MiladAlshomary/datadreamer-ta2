@@ -1,0 +1,98 @@
+## Generate embeddings
+Refer to the commands in the file to run : /data/araghavan/HIATUS/datadreamer-ta2/src/generate_luarmud_emb_create_chunk.py
+
+## Create hard positive pairs
+python /data/araghavan/HIATUS/datadreamer-ta2/src/hard_batching_rankingloss_optimized_chunks.py
+
+## Create hard batches
+Notebook: /data/araghavan/HIATUS/datadreamer-ta2/src/hard_batches_from_hard_pos_pairs_pipeline.ipynb
+
+## Edited: /data/araghavan/HIATUS/datadreamer-ta2/src/sadiri_training.py, Created: /data/araghavan/HIATUS/datadreamer-ta2/src/train_luar_on_sadiri_hardbatchingrankingloss.py
+## v001: Ran full training of LUAR on sadiri with hard batches 
+python /data/araghavan/HIATUS/datadreamer-ta2/src/train_luar_on_sadiri_hardbatchingrankingloss.py
+
+## Copied full trained sadiri model as luar baseline model to path: /data/araghavan/HIATUS/pausit-eval-ta2/rrivera1849
+# Run once: Command: mv /data/araghavan/HIATUS/pausit-eval-ta2/rrivera1849/LUAR-MUD /data/araghavan/HIATUS/pausit-eval-ta2/rrivera1849/LUAR-MUD_original
+Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_hardbatching_rankingloss_wo_ao3_filtered_model_v001final_model /data/araghavan/HIATUS/pausit-eval-ta2/rrivera1849/LUAR-MUD
+
+### v001: Eval full trained luar on sadiri with hard batches
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_hardbatchsadirifulltrain_20250401_094400/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_1/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 5 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_2/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_hardbatchsadirifulltrain_20250401_094401/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_2/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 6 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_3/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_hardbatchsadirifulltrain_20250401_094402/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_3/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 7 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_4/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_hardbatchsadirifulltrain_20250401_094403/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_4/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 8 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_5/test/TA2/hrs2_09-24-24_english_crossGenre-combined/data/"  --output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc_outputs/k_fold_test_hardbatchsadirifulltrain_20250401_094404/" --ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/nikita_direct_splits_5_random_fold_splits_qc/crossGenre/fold_5/test/TA2/hrs2_09-24-24_english_crossGenre-combined/groundtruth/"  --run-id 9 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 baseline_luar -g -ta2 baseline --language eng
+
+Output:
+Area Under ROC Curve            0.673690
+partial Area Under ROC Curve    0.544159
+Precision                       0.021739
+Recall                          0.035714
+F1                              0.027027
+Equal Error Rate                0.321430
+Detection Cost Function         0.883804
+TAR@0.05                        0.357143
+Name: Summary, dtype: float64
+==> Total duration (s): 7.375800132751465
+
+
+Area Under ROC Curve            0.801515
+partial Area Under ROC Curve    0.585166
+Precision                       0.074074
+Recall                          0.121212
+F1                              0.091954
+Equal Error Rate                0.242422
+Detection Cost Function         0.810943
+TAR@0.05                        0.424242
+Name: Summary, dtype: float64
+==> Total duration (s): 6.595426082611084
+
+
+Area Under ROC Curve            0.651640
+partial Area Under ROC Curve    0.521315
+Precision                       0.017241
+Recall                          0.034483
+F1                              0.022989
+Equal Error Rate                0.382897
+Detection Cost Function         0.967455
+TAR@0.05                        0.275862
+Name: Summary, dtype: float64
+==> Total duration (s): 6.465691089630127
+
+/gaia_data/araghavan/.conda/envs/hiatus/lib/python3.11/tempfile.py:934: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmpp6wna1bd'>
+  _warnings.warn(warn_message, ResourceWarning)
+
+
+Area Under ROC Curve            0.627591
+partial Area Under ROC Curve    0.525720
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.379309
+Detection Cost Function         0.936972
+TAR@0.05                        0.241379
+Name: Summary, dtype: float64
+==> Total duration (s): 6.505952596664429
+
+/gaia_data/araghavan/.conda/envs/hiatus/lib/python3.11/tempfile.py:934: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmp85ulpsni'>
+  _warnings.warn(warn_message, ResourceWarning)
+
+
+Area Under ROC Curve            0.792327
+partial Area Under ROC Curve    0.572043
+Precision                       0.040816
+Recall                          0.083333
+F1                              0.054795
+Equal Error Rate                0.249993
+Detection Cost Function         0.839161
+TAR@0.05                        0.333333
+Name: Summary, dtype: float64
+==> Total duration (s): 6.656733512878418
+
+Area Under ROC Curve: 0.709
+Partial Area Under ROC Curve: 0.550
+Precision: 0.031
+Recall: 0.055
+F1 Score: 0.039
+Equal Error Rate: 0.315
+Detection Cost Function: 0.888
+TAR@0.05: 0.326

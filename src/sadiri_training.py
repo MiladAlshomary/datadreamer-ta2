@@ -7,6 +7,7 @@ import jsonlines
 import numpy as np
 from transformers import TrainerCallback
 from itertools import islice
+from batching_for_rankingloss import HardBatchCreator
 
 # Add the parent directory of 'src' (which is the root directory) to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'training_source')))
@@ -503,3 +504,56 @@ def get_data_generator_for_k_fold_hrs(path, fold, split, split_percent=None):
             yield row
 
     return total_num_rows, data_generator
+
+
+def get_sadiri_batching_for_rankingloss(path, split):
+    """
+    Data generator that alternates genres across batches while keeping a single genre per batch.
+    :param path: Path to the dataset.
+    :param split: Data split (e.g., "train" or "dev").
+    :param genres: List of all possible genres (if not provided, infer from the data).
+    """
+    import pdb; pdb.set_trace()
+    file_path = path.replace("{split}", split)
+    print(f"Called to read file: {file_path}")
+    
+    file_df = pd.read_json(file_path, lines=True)
+    print(f"Finished Loading file: {file_path} with Shape: {file_df.shape}")
+
+    if split == "train": 
+        # print(f"Stats, Len of Batches: {len(batches)}, Len Within Batch:{len(batches[0])}, And within batch, sample: {batches[0][0]}")
+        print(f"Number of Batches: {file_df['batch_id'].nunique()} and counter: {file_df['batch_id'].value_counts()}")
+        batches = file_df['batch_id'].values.tolist()
+        # Define the data generator
+        def data_generator():
+            seed = epoch_tracker['epoch'] if split == 'train' else 0
+            rand = Random(seed)
+            rand.shuffle(batches)
+            for batch in batches:
+                batch_rows = file_df.loc[file_df['batch_id'] == batch]
+                for _, anchpospair in batch_rows.iterrows():
+                    yield {'anchors': anchpospair['fullText_anchor'], 'positives': anchpospair['fullText_positive']}
+
+        return file_df.shape[0], data_generator
+    else:
+        file_df['authorID'] = file_df['authorIDs'].apply(lambda x: x[0])
+        # Remove authors that don't meet minimum documents threshold count
+        file_df = file_df[file_df.groupby('authorID')['documentID'].transform('count') > 1]
+        
+        # Aggregate documents at author level
+        aggregated_file_df = file_df.groupby('authorID', as_index=False).agg({'documentID': list, 'fullText': list})
+        # aggregated_file_df = aggregated_file_df.sample(n=200)
+        print(f"Finished aggregating at author level: {aggregated_file_df} with shape: {aggregated_file_df.shape}")
+
+        # Define the data generator
+        def data_generator():
+            seed = epoch_tracker["epoch"] if split == "train" else 0
+            rand = Random(seed)
+
+            # Shuffle the data for the current epoch
+            shuffled_df = aggregated_file_df.sample(frac=1, random_state=seed)  # Use fixed seed for reproducibility
+            for _, row in shuffled_df.iterrows():
+                pair = rand.sample(row['fullText'], 2)
+                yield {'anchors': pair[0], 'positives': pair[1]}
+
+        return aggregated_file_df.shape[0], data_generator

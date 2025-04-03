@@ -1,5 +1,7 @@
 (echo "source,doc,batch,min_author_docs_count,min_batch_authors_sample,nrows,unique_author_counts"; for file in *batch_01.jsonl; do nrows=$(wc -l < "$file"); unique_authors=$(grep -Po 'authorID":"[^"]*' "$file" | sort -u | wc -l); head -1 "$file" | python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["source"], obj["doc"], obj["batch"], obj["min_author_docs_count"], obj["min_batch_authors_sample"], sep=",", end="")'; echo ",$nrows,$unique_authors"; done) > batch_metadata_v2.csv
 
+(echo "source,doc,batch,min_author_docs_count,min_batch_authors_sample,nrows,unique_author_counts"; for file in *batch_01.jsonl; do nrows=$(wc -l < "$file"); unique_authors=$(grep -Po 'authorID":"[^"]*' "$file" | sort -u | wc -l); head -1 "$file" | python -c 'import json,sys; obj=json.load(sys.stdin); print(obj["source_of_biber"], obj["min_length_words_biber"], obj["batch_biber"], obj["min_author_docs_count_biber"], obj["min_batch_authors_sample_biber"], sep=",", end="")'; echo ",$nrows,$unique_authors"; done) > batch_metadata.csv
+
 (echo "filename,line_number,documentID,language"; \
  for file in *.jsonl; do \
    nl -ba "$file" | while read -r num line; do \
