@@ -110,16 +110,21 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
             batch = [seed_pair]
         else:
             candidate_embeddings = np.stack(candidate_embeddings, axis=0)
-            int8_candidate_embeddings = quantize_embeddings(candidate_embeddings, precision='int8')
+            binary_candidate_embeddings = quantize_embeddings(candidate_embeddings, precision='ubinary')
+
+            d = binary_candidate_embeddings.shape[1] * 8
+            index = faiss.IndexBinaryFlat(d)
+            index.add(binary_candidate_embeddings)
 
             top_k = batch_size - 1
             results, search_time = semantic_search_faiss(
-                 query_embeddings=np.expand_dims(seed_embedding, axis=0),
-                 corpus_embeddings=int8_candidate_embeddings,
-                 top_k=top_k,
-                 corpus_precision='int8', 
-                 exact=False,
-                 output_index=False
+                query_embeddings=np.expand_dims(seed_embedding, axis=0),
+                corpus_index=index,
+                top_k=top_k,
+                corpus_precision='ubinary',
+                exact=False,
+                rescore=False,
+                output_index=False
             )
 
             selected_pairs = []
