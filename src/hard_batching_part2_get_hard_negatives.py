@@ -202,25 +202,9 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
     pbar.close()
     return batches
 
-
-# Example usage:
-file_path = "/mnt/nlpgpu-io1/data/jiachzhu/projects/data/train_sadiri_processed_with_luarsbertembeddings_wo_ao3_filtered.jsonl"
-file_df = pd.read_json(file_path, lines=True)  # Use lines=True if the file is NDJSON
-positive_pairs_path = "../output/positives_nested.json"
-with open(positive_pairs_path, "r") as f:
-    positives_nested = json.load(f)
-
-batches = hard_negative_batching(positives_nested, file_df, batch_size=1024)
-
-# Save the resulting batches to a JSON file
-with open("../output/batches.json", "w") as f:
-    json.dump(batches, f, indent=2)
-
-
-
 # Load the original DataFrame from the JSON Lines file.
 file_path = "/mnt/nlpgpu-io1/data/jiachzhu/projects/data/train_sadiri_processed_with_luarsbertembeddings_wo_ao3_filtered.jsonl"
-file_df = pd.read_json(file_path)  # Use lines=True if it's NDJSON
+file_df = pd.read_json(file_path)
 
 # Load the previously generated positives_nested JSON file.
 positive_pairs_path = "../output/positives_nested.json"
