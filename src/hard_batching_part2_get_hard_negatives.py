@@ -117,7 +117,7 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
                  query_embeddings=np.expand_dims(seed_embedding, axis=0),
                  corpus_embeddings=int8_candidate_embeddings,
                  top_k=top_k,
-                 corpus_precision='int8',  # Now using int8 quantization.
+                 corpus_precision='int8', 
                  exact=False,
                  output_index=False
             )
