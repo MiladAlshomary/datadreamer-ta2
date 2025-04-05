@@ -28,7 +28,7 @@ from sentence_transformers import losses
 from peft import LoraConfig
 from random import Random
 
-from luar_utils import get_luar_trainer
+from ..training_source.luar_utils import get_luar_trainer
 
 def get_performs_data_generator(path, split):
     train_folder_path = path.replace('{split}', split)

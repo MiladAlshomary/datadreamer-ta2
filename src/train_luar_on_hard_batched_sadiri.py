@@ -1,4 +1,4 @@
-from sadiri_training import get_data_generator_hard_batches
+from sadiri_training import get_data_generator_hard_batches, DataSource, DataDreamer, get_luar_trainer, LoraConfig, EpochTrackerCallback, losses
 import os
 
 
@@ -19,8 +19,6 @@ def train_datadreamer_ta2_on_hard_batched_data(fold, output_folder, used_loss, b
     # Get data generators for training and dev (using the same batches for now as placeholder)
     train_num_batches, train_data_generator = get_data_generator_hard_batches(batches_path, "train")
     dev_num_batches, dev_data_generator = get_data_generator_hard_batches(batches_path, "dev")
-
-    from sadiri_training import DataSource, DataDreamer, get_luar_trainer, LoraConfig, EpochTrackerCallback, losses
 
     with DataDreamer(output_folder):
         dataset = DataSource(
