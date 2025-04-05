@@ -44,160 +44,127 @@ Function hard_negative_batching(positive_nested, file_df, batch_size):
 import numpy as np
 import pandas as pd
 import random
-import faiss
 import json
 from tqdm import tqdm
+from sentence_transformers.quantization import semantic_search_faiss
 
 
 def hard_negative_batching(positive_nested, file_df, batch_size):
     """
-    Create batches for hard negative ranking, while tracking progress of pair removal.
+    Create batches for hard negative ranking, while tracking progress of pair removal,
+    and using sentence_transformers' semantic_search_faiss for candidate selection.
+
+    This version combines the construction of candidate cache, reverse lookup, and total pair count.
 
     Parameters:
         positive_nested (dict): Nested dictionary mapping each author to a dictionary
                                 of positive pair groups (group1, group2, group3, group4).
         file_df (pd.DataFrame): Original DataFrame containing at least:
-                                'documentID', 'doc_sbertamllv2_embedding', and 'fullText'.
+                                'documentID', 'doc_luarmud_embedding', and 'fullText'.
         batch_size (int): Number of pairs to include in each batch. Each batch will have
                           one seed pair plus (batch_size - 1) negatives.
 
     Returns:
         List of batches. Each batch is a list of pair dictionaries.
     """
-    # Build a mapping from documentID to its normalized embedding
+    # Build mappings from documentID to its style embedding and full text.
     doc_embedding_dict = {}
-    for idx, row in file_df.iterrows():
-        doc_id = row['documentID']
-        emb = np.array(row['doc_luarmud_embedding'], dtype='float32')
-        norm = np.linalg.norm(emb)
-        if norm > 0:
-            emb = emb / norm
-        doc_embedding_dict[doc_id] = emb
-
-    # Build a mapping from documentID to full text
     doc_text_dict = {}
     for idx, row in file_df.iterrows():
         doc_id = row['documentID']
+        emb = np.array(row['doc_luarmud_embedding'], dtype='float32')
+        doc_embedding_dict[doc_id] = emb
         doc_text_dict[doc_id] = row['fullText']
+    print("Completed: Mapped doc ID to style embedding / full text.")
 
-    # Compute total number of positive pairs initially for progress bar
+    # Build candidate cache, reverse lookup, and count total pairs
+    candidate_cache = {}
+    reverse_lookup = {}
     total_pairs = 0
     for author, groups in positive_nested.items():
+        candidate_cache[author] = []
         for group in ['group1', 'group2', 'group3', 'group4']:
-            total_pairs += len(groups.get(group, []))
+            pairs = groups.get(group, [])
+            total_pairs += len(pairs)
+            for pair in pairs:
+                candidate_cache[author].append((pair, group))
+                key = (pair['doc1'], pair['doc2'])
+                reverse_lookup[key] = (author, group)
+    print("Completed: Candidate cache, reverse lookup, and total pair count built.")
 
     pbar = tqdm(total=total_pairs, desc="Processing Pairs")
+    print("Completed: Progress bar initialized.")
 
     batches = []
 
-    # Continue until positive_nested is empty
+    # Continue until positive_nested is empty.
     while positive_nested:
-        # Get available authors (those that still have at least one pair)
         available_authors = list(positive_nested.keys())
         if not available_authors:
             break
 
-        # Randomly select a seed author
+        # Randomly select a seed author.
         seed_author = random.choice(available_authors)
-        seed_pair = None
-        # Pick one positive pair from seed_author from any non-empty group
-        for group in ['group1', 'group2', 'group3', 'group4']:
-            if positive_nested[seed_author].get(group):
-                seed_pair = random.choice(positive_nested[seed_author][group])
-                break
-        if seed_pair is None:
-            del positive_nested[seed_author]
-            continue
-
-        # Get seed anchor's document ID and embedding (we use 'doc1' as anchor)
+        seed_tuple = random.choice(candidate_cache[seed_author])
+        candidate_cache[seed_author].remove(seed_tuple)
+        seed_pair = seed_tuple[0]
         seed_doc_id = seed_pair['doc1']
         seed_embedding = doc_embedding_dict.get(seed_doc_id)
-        if seed_embedding is None:
-            # Remove seed_pair if its embedding cannot be found and update progress bar
-            for group in ['group1', 'group2', 'group3', 'group4']:
-                if seed_pair in positive_nested[seed_author].get(group, []):
-                    positive_nested[seed_author][group].remove(seed_pair)
-                    pbar.update(1)
-                    break
-            if all(len(positive_nested[seed_author].get(g, [])) == 0 for g in ['group1', 'group2', 'group3', 'group4']):
-                del positive_nested[seed_author]
-            continue
 
-        # Define corpus authors (all authors except the seed author)
         corpus_authors = [a for a in available_authors if a != seed_author]
         candidate_pairs = []
-        candidate_authors = []
-        # For each corpus author, pick one candidate pair (from any non-empty group)
         for author in corpus_authors:
-            candidate_pair = None
-            for group in ['group1', 'group2', 'group3', 'group4']:
-                if positive_nested[author].get(group):
-                    candidate_pair = random.choice(positive_nested[author][group])
-                    break
-            if candidate_pair:
+            if candidate_cache.get(author) and len(candidate_cache[author]) > 0:
+                candidate_tuple = random.choice(candidate_cache[author])
+                candidate_pair, group = candidate_tuple
+                candidate_cache[author].remove(candidate_tuple)
                 candidate_pairs.append(candidate_pair)
-                candidate_authors.append(author)
+        candidate_embeddings = [doc_embedding_dict.get(pair['doc1']) for pair in candidate_pairs]
 
-        # Build candidate embeddings from the candidate pairs (using their doc1 anchors)
-        candidate_embeddings = []
-        for pair in candidate_pairs:
-            doc_id = pair['doc1']
-            emb = doc_embedding_dict.get(doc_id)
-            if emb is not None:
-                candidate_embeddings.append(emb)
-            else:
-                candidate_embeddings.append(np.zeros_like(seed_embedding))
-        # If no candidates, form batch with only the seed pair.
         if len(candidate_embeddings) == 0:
             batch = [seed_pair]
         else:
             candidate_embeddings = np.stack(candidate_embeddings, axis=0)
-            # Build FAISS index on candidate embeddings (using inner product as cosine similarity)
-            d = candidate_embeddings.shape[1]
-            index = faiss.IndexFlatIP(d)
-            index.add(candidate_embeddings)
-            top_k = batch_size - 1  # we want batch_size pairs including the seed
-            seed_embedding_np = np.expand_dims(seed_embedding, axis=0)
-            D, I = index.search(seed_embedding_np, top_k)
+            top_k = batch_size - 1
+            results, search_time, _ = semantic_search_faiss(
+                query_embeddings=np.expand_dims(seed_embedding, axis=0),
+                corpus_embeddings=candidate_embeddings,
+                top_k=top_k,
+                corpus_precision='binary',
+                exact=False,
+                output_index=False
+            )
             selected_pairs = []
-            for idx in I[0]:
+            for res in results[0]:
+                idx = res["corpus_id"]
                 if idx < len(candidate_pairs):
                     selected_pairs.append(candidate_pairs[idx])
             batch = [seed_pair] + selected_pairs
 
         batches.append(batch)
-
-        # Count the number of pairs removed in this iteration (seed pair plus candidate pairs)
         pairs_removed = len(batch)
 
-        # Remove used pairs from positive_nested:
-        # Remove seed_pair from seed_author
-        for group in ['group1', 'group2', 'group3', 'group4']:
-            if seed_pair in positive_nested[seed_author].get(group, []):
-                positive_nested[seed_author][group].remove(seed_pair)
-                break
-        # Remove each candidate pair used from its corresponding author
+        # Remove used pairs using reverse lookup.
+        seed_key = (seed_pair['doc1'], seed_pair['doc2'])
+        if seed_key in reverse_lookup:
+            author, group = reverse_lookup[seed_key]
+            positive_nested[author][group].remove(seed_pair)
+            del reverse_lookup[seed_key]
         for candidate_pair in batch[1:]:
-            candidate_author = None
-            for author in corpus_authors:
-                for group in ['group1', 'group2', 'group3', 'group4']:
-                    if candidate_pair in positive_nested.get(author, {}).get(group, []):
-                        candidate_author = author
-                        positive_nested[author][group].remove(candidate_pair)
-                        break
-                if candidate_author:
-                    break
+            candidate_key = (candidate_pair['doc1'], candidate_pair['doc2'])
+            if candidate_key in reverse_lookup:
+                author, group = reverse_lookup[candidate_key]
+                positive_nested[author][group].remove(candidate_pair)
+                del reverse_lookup[candidate_key]
 
-        # Update the progress bar by the number of pairs removed in this iteration
         pbar.update(pairs_removed)
-
-        # Remove any authors that have no remaining pairs in any group
         authors_to_remove = []
         for author in list(positive_nested.keys()):
             if all(len(positive_nested[author].get(g, [])) == 0 for g in ['group1', 'group2', 'group3', 'group4']):
                 authors_to_remove.append(author)
         for author in authors_to_remove:
             del positive_nested[author]
+            candidate_cache.pop(author, None)
 
     pbar.close()
     return batches
