@@ -109,7 +109,6 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
                 query_embeddings=np.expand_dims(seed_embedding, axis=0),
                 corpus_embeddings=candidate_embeddings,
                 top_k=top_k,
-                corpus_precision='binary',
                 exact=False,
                 output_index=False
             )
