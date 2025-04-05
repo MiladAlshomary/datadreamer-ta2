@@ -68,7 +68,7 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
     doc_embedding_dict = {}
     for idx, row in file_df.iterrows():
         doc_id = row['documentID']
-        emb = np.array(row['doc_sbertamllv2_embedding'], dtype='float32')
+        emb = np.array(row['doc_luarmud_embedding'], dtype='float32')
         norm = np.linalg.norm(emb)
         if norm > 0:
             emb = emb / norm
