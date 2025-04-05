@@ -105,7 +105,7 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
         else:
             candidate_embeddings = np.stack(candidate_embeddings, axis=0)
             top_k = batch_size - 1
-            results, search_time, _ = semantic_search_faiss(
+            results, search_time = semantic_search_faiss(
                 query_embeddings=np.expand_dims(seed_embedding, axis=0),
                 corpus_embeddings=candidate_embeddings,
                 top_k=top_k,
