@@ -25,7 +25,8 @@ import pandas as pd
 import random
 import json
 from tqdm import tqdm
-from sentence_transformers.quantization import semantic_search_faiss
+import faiss
+from sentence_transformers.quantization import semantic_search_faiss, quantize_embeddings
 
 
 def hard_negative_batching(positive_nested, file_df, batch_size):
@@ -88,7 +89,7 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
             del positive_nested[seed_author] # Remove author since they have no candidates left.
             candidate_cache.pop(seed_author, None)
             continue  # Skip this iteration and move to the next
-            
+
         seed_tuple = random.choice(candidate_cache[seed_author])
         candidate_cache[seed_author].remove(seed_tuple)
         seed_pair = seed_tuple[0]
@@ -109,14 +110,22 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
             batch = [seed_pair]
         else:
             candidate_embeddings = np.stack(candidate_embeddings, axis=0)
+            binary_candidate_embeddings = quantize_embeddings(candidate_embeddings, precision='ubinary')
+
+            d = binary_candidate_embeddings.shape[1]
+            index = faiss.IndexBinaryFlat(d)
+            index.add(binary_candidate_embeddings)
+
             top_k = batch_size - 1
             results, search_time = semantic_search_faiss(
                 query_embeddings=np.expand_dims(seed_embedding, axis=0),
-                corpus_embeddings=candidate_embeddings,
+                corpus_index=index,
                 top_k=top_k,
+                corpus_precision='ubinary',
                 exact=False,
                 output_index=False
             )
+
             selected_pairs = []
             for res in results[0]:
                 idx = res["corpus_id"]
