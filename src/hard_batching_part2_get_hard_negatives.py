@@ -84,6 +84,11 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
 
         # Randomly select a seed author.
         seed_author = random.choice(available_authors)
+        if not candidate_cache[seed_author]:
+            del positive_nested[seed_author] # Remove author since they have no candidates left.
+            candidate_cache.pop(seed_author, None)
+            continue  # Skip this iteration and move to the next
+            
         seed_tuple = random.choice(candidate_cache[seed_author])
         candidate_cache[seed_author].remove(seed_tuple)
         seed_pair = seed_tuple[0]
