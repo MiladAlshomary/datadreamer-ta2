@@ -1,44 +1,23 @@
 '''
+BIG IDEA:
+- choose a seed pair from one author, then for every other unique author,
+  randomly sample one candidate pair, use FAISS semantic search to select the hardest negatives for the batch.
 PSEUDOCODE:
-
-Function hard_negative_batching(positive_nested, file_df, batch_size):
-    Build doc_embedding_dict mapping documentID to normalized embedding
-    Build doc_text_dict mapping documentID to fullText  <-- NEW
-
-    Initialize empty list batches
-
-    WHILE positive_nested is not empty:
-        available_authors = list of keys in positive_nested
-        IF available_authors is empty, BREAK
-
-        seed_author = randomly choose an author from available_authors
-        seed_pair = randomly choose one positive pair from seed_author (from any non-empty group)
-        IF no seed_pair found, remove seed_author and CONTINUE
-
-        seed_doc_id = seed_pair['doc1']
-        seed_embedding = doc_embedding_dict[seed_doc_id]
-        IF seed_embedding not found, remove seed_pair and CONTINUE
-
-        corpus_authors = available_authors excluding seed_author
-        FOR each author in corpus_authors:
-            candidate_pair = randomly choose one positive pair from that author (from any non-empty group)
-            IF candidate_pair exists, add to candidate_pairs list
-
-        IF candidate_pairs is empty:
-            batch = [seed_pair]
-        ELSE:
-            Build candidate_embeddings from candidate_pairs using doc_embedding_dict
-            Build FAISS index on candidate_embeddings
-            Query FAISS with seed_embedding to get top (batch_size - 1) candidate indices
-            selected_pairs = candidate_pairs corresponding to top indices
-            batch = [seed_pair] + selected_pairs
-
-        Append batch to batches
-
-        Remove seed_pair and selected candidate_pairs from positive_nested
-        Remove any authors with no remaining pairs from positive_nested
-
-    RETURN batches
+1. Build mappings from document IDs to embeddings and full text.
+2. For each author and group in positive pairs:
+   - Add each pair to a candidate cache.
+   - Record a reverse lookup that maps each pair (using doc1 and doc2) to its author and group.
+   - Count the total number of pairs.
+3. Initialize a progress bar with the total pair count.
+4. While there are still positive pairs:
+   a. Randomly select a seed author and choose one seed pair from that author’s cache.
+   b. Retrieve the seed pair’s embedding.
+   c. For all other authors, randomly pick candidate pairs from their caches.
+   d. Use semantic_search_faiss (with corpus_precision set to 'binary') to find the top candidate pairs based on the seed embedding.
+   e. Form a batch consisting of the seed pair and the selected candidate pairs.
+   f. Remove the used pairs from your data structures using the reverse lookup.
+   g. Update the progress bar and clean up any authors with no remaining pairs.
+5. Close the progress bar and return the batches.
 '''
 
 import numpy as np
@@ -179,7 +158,6 @@ with open(positive_pairs_path, "r") as f:
     positives_nested = json.load(f)
 
 # Run the hard negative batching function.
-# (Assuming the function 'hard_negative_batching' is defined in your code)
 batches = hard_negative_batching(positives_nested, file_df, batch_size=1024)
 
 # Save the resulting batches to a local JSON file.
