@@ -503,3 +503,41 @@ def get_data_generator_for_k_fold_hrs(path, fold, split, split_percent=None):
             yield row
 
     return total_num_rows, data_generator
+
+
+def get_data_generator_hard_batches(path, split):
+    """
+    Data generator that yields hard negative batches as training examples.
+    It loads batches from a JSON file and yields a dictionary with keys:
+      'anchors': list of anchor texts,
+      'positives': list of positive texts.
+
+    The 'split' parameter is kept as a placeholder.
+
+    Parameters:
+        path (str): Path to the batches JSON file.
+        split (str): Data split (e.g., "train" or "dev"); currently only 'train' is available.
+
+    Returns:
+        tuple: (num_batches, generator_function)
+    """
+    # Load the batches from the JSON file.
+    with open(path, "r") as f:
+        batches = json.load(f)
+    num_batches = len(batches)
+
+    def data_generator():
+        for batch in batches:
+            anchors = []
+            positives = []
+            # Each batch is a list of pair dictionaries.
+            for pair in batch:
+                # Use 'fullText1' as anchor and 'fullText2' as positive if available;
+                # fall back to 'doc1'/'doc2' if not.
+                anchor = pair.get("fullText1", pair.get("doc1", ""))
+                positive = pair.get("fullText2", pair.get("doc2", ""))
+                anchors.append(anchor)
+                positives.append(positive)
+            yield {"anchors": anchors, "positives": positives}
+
+    return num_batches, data_generator

@@ -71,7 +71,7 @@ def process_author(args):
     n_docs = len(df)
 
     # Compute the cosine similarity matrix for all documents of this author.
-    sim_matrix = cosine_similarity(embeddings)
+    sim_matrix = np.abs(cosine_similarity(embeddings))
 
     # Get the indices for the upper triangle (non-redundant pairs)
     i_idx, j_idx = np.triu_indices(n_docs, k=1)
@@ -138,6 +138,13 @@ def get_positives_nested_parallel(data_by_author, semantic_threshold=0.2, max_wo
 
 
 # group documents by authorID:
+# format of this dataframe: Index(['documentID', 'authorIDs', 'fullText', 'spanAttribution',
+#        'collectionNum', 'source', 'dateCollected', 'publiclyAvailable',
+#        'deidentified', 'languages', 'lengthWords', 'dateCreated',
+#        'timeCreated', 'isForeground', 'authorID', 'genre',
+#        'doc_sbertamllv2_embedding', 'doc_luarmud_embedding',
+#        'doc_xrbmtgc_genre'],
+#       dtype='object')
 file_path = "/mnt/nlpgpu-io1/data/jiachzhu/projects/data/train_sadiri_processed_with_luarsbertembeddings_wo_ao3_filtered.jsonl"
 file_df = pd.read_json(file_path)
 data_by_author = {author: group for author, group in file_df.groupby('authorID')}
