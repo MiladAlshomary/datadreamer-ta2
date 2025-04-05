@@ -220,7 +220,7 @@ with open("../output/batches.json", "w") as f:
 
 # Load the original DataFrame from the JSON Lines file.
 file_path = "/mnt/nlpgpu-io1/data/jiachzhu/projects/data/train_sadiri_processed_with_luarsbertembeddings_wo_ao3_filtered.jsonl"
-file_df = pd.read_json(file_path, lines=True)  # Use lines=True if it's NDJSON
+file_df = pd.read_json(file_path)  # Use lines=True if it's NDJSON
 
 # Load the previously generated positives_nested JSON file.
 positive_pairs_path = "../output/positives_nested.json"
