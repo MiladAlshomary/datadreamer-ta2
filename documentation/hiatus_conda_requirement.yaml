@@ -58,9 +58,8 @@ dependencies:
       - cycler==0.12.1
       - cymem==2.0.10
       #- datadreamer==0.2.0
-      #- datadreamer-dev==0.38.0
+      - datadreamer-dev==0.38.0
       - datadreamer
-      - datadreamer-dev
       - datamodel-code-generator==0.26.1
       - datasets==2.21.0
       - decorator==5.1.1
