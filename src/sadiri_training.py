@@ -28,7 +28,7 @@ from sentence_transformers import losses
 from peft import LoraConfig
 from random import Random
 
-from ..training_source.luar_utils import get_luar_trainer
+from training_source.luar_utils import get_luar_trainer
 
 def get_performs_data_generator(path, split):
     train_folder_path = path.replace('{split}', split)
@@ -505,7 +505,7 @@ def get_data_generator_for_k_fold_hrs(path, fold, split, split_percent=None):
     return total_num_rows, data_generator
 
 
-def get_data_generator_hard_batches(path, split):
+def get_data_generator_hard_batches(text_path, batches_path, split):
     """
     Data generator that yields hard negative batches as training examples.
     It loads batches from a JSON file and yields a dictionary with keys:
@@ -522,23 +522,32 @@ def get_data_generator_hard_batches(path, split):
         tuple: (num_batches, generator_function)
     """
     # Load the batches from the JSON file.
-    file_path = path.replace("{split}", split)
-    print(f"Called to read file: {file_path}")
-
-    with open(file_path, "r") as f:
+    batches_info_path = batches_path.replace("{split}", split)
+    print(f"Reading batches info at: {batches_info_path}")
+    sys.stdout.flush()
+    with open(batches_info_path, "r") as f:
         batches = json.load(f)
     num_batches = len(batches)
+    print("Completed: batches loaded.")
+    sys.stdout.flush()
+
+    print(f"Loading text info at: {text_path}")
+    sys.stdout.flush()
+    doc_text_dict = {}
+    text_df = pd.read_json(text_path)
+    for idx, row in text_df.iterrows():
+        doc_id = row['documentID']
+        doc_text_dict[doc_id] = row['fullText']
+    print("Completed: text loaded")
+    sys.stdout.flush()
 
     def data_generator():
         for batch in batches:
             anchors = []
             positives = []
-            # Each batch is a list of pair dictionaries.
             for pair in batch:
-                # Use 'fullText1' as anchor and 'fullText2' as positive if available;
-                # fall back to 'doc1'/'doc2' if not.
-                anchor = pair.get("fullText1", pair.get("doc1", ""))
-                positive = pair.get("fullText2", pair.get("doc2", ""))
+                anchor = doc_text_dict.get(pair.get("doc1"))
+                positive = doc_text_dict.get(pair.get("doc2"))
                 anchors.append(anchor)
                 positives.append(positive)
             yield {"anchors": anchors, "positives": positives}

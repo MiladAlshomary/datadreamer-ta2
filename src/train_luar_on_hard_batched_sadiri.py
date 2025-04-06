@@ -2,7 +2,7 @@ from sadiri_training import get_data_generator_hard_batches, DataSource, DataDre
 import os
 
 
-def train_datadreamer_ta2_on_hard_batched_data(output_folder, batches_path,
+def train_datadreamer_ta2_on_hard_batched_data(text_path, output_folder, batches_path,
                                                luar_model_path, batch_size=1024, epochs=25):
     """
     Train using hard-batched data loaded from batches.json.
@@ -17,8 +17,8 @@ def train_datadreamer_ta2_on_hard_batched_data(output_folder, batches_path,
         epochs (int): Number of epochs.
     """
     # Get data generators for training and dev (using the same batches for now as placeholder)
-    train_num_batches, train_data_generator = get_data_generator_hard_batches(batches_path, "train")
-    dev_num_batches, dev_data_generator = get_data_generator_hard_batches(batches_path, "dev")
+    train_num_batches, train_data_generator = get_data_generator_hard_batches(text_path, batches_path, "train")
+    dev_num_batches, dev_data_generator = get_data_generator_hard_batches(text_path, batches_path, "dev")
 
     with DataDreamer(output_folder):
         dataset = DataSource(
@@ -70,9 +70,12 @@ def train_datadreamer_ta2_on_hard_batched_data(output_folder, batches_path,
 output_path = '../output'
 luar_model_path = '../training_source/rrivera1849/LUAR-MUD'
 model_op_dir = os.path.join(output_path, 'sadiri_hard_batch_model_v1')
+batches_path = "../output/{split}_batches.json" # this only store doc id like {'doc1': 'c93d1d1c-3357-2ba8-b604-7a76ffecd66b', 'doc2': '979f7248-6df3-8656-374c-6acfffb98866', 'similarity': 0.15085165411557855, 'genre1': 'Opinion/Argumentation', 'genre2': 'Forum'}
+text_path = "/mnt/nlpgpu-io1/data/jiachzhu/projects/data/train_sadiri_processed_with_luarsbertembeddings_wo_ao3_filtered.jsonl" # this has text
 
 train_datadreamer_ta2_on_hard_batched_data(
+    text_path=text_path,
     output_folder=model_op_dir,
-    batches_path="../output/{split}_batches.json",
+    batches_path=batches_path,
     luar_model_path=luar_model_path,
 )

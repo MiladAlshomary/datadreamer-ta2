@@ -29,7 +29,6 @@ import faiss
 import sys
 from sentence_transformers.quantization import semantic_search_faiss, quantize_embeddings
 
-
 def hard_negative_batching(positive_nested, file_df, batch_size):
     """
     Optimized batching that precomputes quantized embeddings and builds a global FAISS index
@@ -39,14 +38,14 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
     # -----------------------------
     # 1. Build mappings from documentID to its style embedding and full text.
     doc_embedding_dict = {}
-    doc_text_dict = {}
+    #doc_text_dict = {}
     doc_ids = []
     raw_embeddings = []
     for idx, row in file_df.iterrows():
         doc_id = row['documentID']
         emb = np.array(row['doc_luarmud_embedding'], dtype='float32')
         doc_embedding_dict[doc_id] = emb
-        doc_text_dict[doc_id] = row['fullText']
+        #doc_text_dict[doc_id] = row['fullText']
         doc_ids.append(doc_id)
         raw_embeddings.append(emb)
     print("Completed: Mapped doc ID to style embedding / full text.")
@@ -54,9 +53,7 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
 
     # -----------------------------
     # 2. Precompute quantized embeddings for each document once.
-    # We stack all embeddings and quantize them in one go.
     raw_embeddings_array = np.stack(raw_embeddings, axis=0)
-    # quantize_embeddings expects a batch and returns binary representations.
     quantized_embeddings_array = quantize_embeddings(raw_embeddings_array, precision='ubinary')
     # Create a lookup: doc_id -> precomputed quantized embedding.
     doc_quantized_dict = {doc_id: quantized_embeddings_array[i] for i, doc_id in enumerate(doc_ids)}
@@ -65,7 +62,6 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
 
     # -----------------------------
     # 3. Build candidate cache and global candidate lookup.
-    # We'll assign a unique candidate_id to each candidate pair.
     candidate_cache = {}  # author -> list of (candidate_id, pair, group)
     global_candidate_lookup = {}  # candidate_id -> (author, pair, group)
     total_pairs = 0
@@ -85,8 +81,6 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
 
     # -----------------------------
     # 4. Build a global FAISS binary index for all candidate embeddings.
-    # We assume that the embedding for a candidate pair is the quantized embedding
-    # of its 'doc1' field.
     candidate_ids = []
     candidate_embeddings_list = []
     for cid, (author, pair, group) in global_candidate_lookup.items():
@@ -135,7 +129,6 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
             try:
                 global_index.remove_ids(np.array([seed_candidate_id], dtype=np.int64))
             except Exception as e:
-                # In case removal fails, log or pass.
                 pass
             global_candidate_lookup.pop(seed_candidate_id, None)
 
@@ -148,7 +141,6 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
 
             # -----------------------------
             # Retrieve negative candidates from the global index.
-            # We query for more than needed to allow for filtering.
             top_k_query = batch_size * 2
             results, search_time = semantic_search_faiss(
                 query_embeddings=np.expand_dims(seed_embedding, axis=0),
@@ -197,19 +189,12 @@ def hard_negative_batching(positive_nested, file_df, batch_size):
             # -----------------------------
             # Remove used pairs from positive_nested.
             # For the seed candidate.
-            seed_key = (seed_pair['doc1'], seed_pair['doc2'])
             if seed_author in positive_nested and seed_pair in positive_nested[seed_author].get(seed_group, []):
                 positive_nested[seed_author][seed_group].remove(seed_pair)
-            # For negatives.
-            for neg in selected_negatives.values():
-                neg_cid, neg_pair, neg_group = neg
-                neg_author = global_candidate_lookup.get(neg_cid, (None,))[0]
-                # Since we already removed from global_candidate_lookup,
-                # use candidate_cache keys (which are authors).
-                # We assume that neg_pair is in positive_nested.
-                if neg_author and neg_author in positive_nested:
-                    if neg_pair in positive_nested[neg_author].get(neg_group, []):
-                        positive_nested[neg_author][neg_group].remove(neg_pair)
+            # For negatives: using the stored negative author (key) from selected_negatives.
+            for neg_author, (neg_cid, neg_pair, neg_group) in selected_negatives.items():
+                if neg_author in positive_nested and neg_pair in positive_nested[neg_author].get(neg_group, []):
+                    positive_nested[neg_author][neg_group].remove(neg_pair)
 
             pairs_removed = 1 + len(selected_negatives)
             pbar.update(pairs_removed)
