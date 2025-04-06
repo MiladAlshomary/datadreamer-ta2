@@ -1,4 +1,4 @@
-from sadiri_training import get_data_generator_hard_batches, DataSource, DataDreamer, get_luar_trainer, LoraConfig, EpochTrackerCallback, losses
+from src.sadiri_training import get_data_generator_hard_batches, DataSource, DataDreamer, get_luar_trainer, LoraConfig, EpochTrackerCallback, losses
 import os
 
 
@@ -23,12 +23,12 @@ def train_datadreamer_ta2_on_hard_batched_data(text_path, output_folder, batches
     with DataDreamer(output_folder):
         dataset = DataSource(
             "Train Data",
-            data=train_data_generator(),
+            data=train_data_generator,
             total_num_rows=train_num_batches,
         )
         dev_dataset = DataSource(
             "Dev Data",
-            data=dev_data_generator(),
+            data=dev_data_generator,
             total_num_rows=dev_num_batches,
         )
 
@@ -67,10 +67,10 @@ def train_datadreamer_ta2_on_hard_batched_data(text_path, output_folder, batches
         trainer.export_to_disk(output_folder + 'final_model', adapter_only=False)
 
 
-output_path = '../output'
-luar_model_path = '../training_source/rrivera1849/LUAR-MUD'
+output_path = '/mnt/nlpgpu-io1/data/jiachzhu/projects/datadreamer-ta2/output'
+luar_model_path = '/mnt/nlpgpu-io1/data/jiachzhu/projects/model/LUAR-MUD'
 model_op_dir = os.path.join(output_path, 'sadiri_hard_batch_model_v1')
-batches_path = "../output/{split}_batches.json" # this only store doc id like {'doc1': 'c93d1d1c-3357-2ba8-b604-7a76ffecd66b', 'doc2': '979f7248-6df3-8656-374c-6acfffb98866', 'similarity': 0.15085165411557855, 'genre1': 'Opinion/Argumentation', 'genre2': 'Forum'}
+batches_path = "/mnt/nlpgpu-io1/data/jiachzhu/projects/datadreamer-ta2/output/{split}_batches.json" # this only store doc id like {'doc1': 'c93d1d1c-3357-2ba8-b604-7a76ffecd66b', 'doc2': '979f7248-6df3-8656-374c-6acfffb98866', 'similarity': 0.15085165411557855, 'genre1': 'Opinion/Argumentation', 'genre2': 'Forum'}
 text_path = "/mnt/nlpgpu-io1/data/jiachzhu/projects/data/train_sadiri_processed_with_luarsbertembeddings_wo_ao3_filtered.jsonl" # this has text
 
 train_datadreamer_ta2_on_hard_batched_data(
