@@ -522,7 +522,10 @@ def get_data_generator_hard_batches(path, split):
         tuple: (num_batches, generator_function)
     """
     # Load the batches from the JSON file.
-    with open(path, "r") as f:
+    file_path = path.replace("{split}", split)
+    print(f"Called to read file: {file_path}")
+
+    with open(file_path, "r") as f:
         batches = json.load(f)
     num_batches = len(batches)
 

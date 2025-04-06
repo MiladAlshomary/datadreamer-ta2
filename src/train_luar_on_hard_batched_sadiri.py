@@ -2,8 +2,8 @@ from sadiri_training import get_data_generator_hard_batches, DataSource, DataDre
 import os
 
 
-def train_datadreamer_ta2_on_hard_batched_data(fold, output_folder, used_loss, batches_path,
-                                               luar_model_path='./rrivera1849', batch_size=128, epochs=25):
+def train_datadreamer_ta2_on_hard_batched_data(output_folder, batches_path,
+                                               luar_model_path, batch_size=1024, epochs=25):
     """
     Train using hard-batched data loaded from batches.json.
 
@@ -39,7 +39,7 @@ def train_datadreamer_ta2_on_hard_batched_data(fold, output_folder, used_loss, b
             trust_remote_code=True,
             device='cuda',
             dtype="bfloat16",
-            force=False,  # so we can resume training if things shut down
+            force=False,
         )
         trainer.train_with_positive_pairs(
             train_anchors=dataset.output["anchors"],
@@ -67,18 +67,12 @@ def train_datadreamer_ta2_on_hard_batched_data(fold, output_folder, used_loss, b
         trainer.export_to_disk(output_folder + 'final_model', adapter_only=False)
 
 
-
 output_path = '../output'
 luar_model_path = '../training_source/rrivera1849/LUAR-MUD'
-fold = "../data/{split}_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl"
 model_op_dir = os.path.join(output_path, 'sadiri_hard_batch_model_v1')
 
 train_datadreamer_ta2_on_hard_batched_data(
-    fold=fold,
     output_folder=model_op_dir,
-    used_loss='MultipleNegativesSymmetricRankingLoss',
-    batches_path="../output/batches.json",
+    batches_path="../output/{split}_batches.json",
     luar_model_path=luar_model_path,
-    batch_size=64,
-    epochs=3
 )
