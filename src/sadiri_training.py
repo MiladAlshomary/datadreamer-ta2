@@ -505,21 +505,21 @@ def get_data_generator_for_k_fold_hrs(path, fold, split, split_percent=None):
     return total_num_rows, data_generator
 
 
-def get_data_generator_hard_batches(text_path, batches_path, split):
+def get_data_generator_hard_batches(doc_text_dict, batches_path, split):
     """
-    Data generator that yields hard negative batches as training examples.
+    Data generator that yields individual hard negative examples as training examples.
     It loads batches from a JSON file and yields a dictionary with keys:
-      'anchors': list of anchor texts,
-      'positives': list of positive texts.
+      'anchors': a single anchor text,
+      'positives': a single positive text.
 
     The 'split' parameter is kept as a placeholder.
 
     Parameters:
-        path (str): Path to the batches JSON file.
-        split (str): Data split (e.g., "train" or "dev"); currently only 'train' is available.
+        batches_path (str): Path to the batches JSON file.
+        split (str): Data split (e.g., "train" or "dev").
 
     Returns:
-        tuple: (num_batches, generator_function)
+        tuple: (num_examples, generator_function)
     """
     # Load the batches from the JSON file.
     batches_info_path = batches_path.replace("{split}", split)
@@ -527,29 +527,17 @@ def get_data_generator_hard_batches(text_path, batches_path, split):
     sys.stdout.flush()
     with open(batches_info_path, "r") as f:
         batches = json.load(f)
-    num_batches = len(batches)
-    print("Completed: batches loaded.")
-    sys.stdout.flush()
 
-    print(f"Loading text info at: {text_path}")
-    sys.stdout.flush()
-    doc_text_dict = {}
-    text_df = pd.read_json(text_path)
-    for idx, row in text_df.iterrows():
-        doc_id = row['documentID']
-        doc_text_dict[doc_id] = row['fullText']
-    print("Completed: text loaded")
+    # Compute total number of examples across all batches.
+    num_examples = sum(len(batch) for batch in batches)
+    print(f"Completed: batches loaded. There are {len(batch)} batches and {num_examples} examples in total.")
     sys.stdout.flush()
 
     def data_generator():
         for batch in batches:
-            anchors = []
-            positives = []
             for pair in batch:
                 anchor = doc_text_dict.get(pair.get("doc1"))
                 positive = doc_text_dict.get(pair.get("doc2"))
-                anchors.append(anchor)
-                positives.append(positive)
-            yield {"anchors": anchors, "positives": positives}
+                yield {"anchors": anchor, "positives": positive}
 
-    return num_batches, data_generator
+    return num_examples, data_generator

@@ -49,17 +49,14 @@ dependencies:
       - click==8.1.7
       - cloudpathlib==0.20.0
       - coloredlogs==15.0.1
-      #- compel==2.0.3
-      - compel
+      - compel==2.0.3
       - confection==0.1.5
       - contourpy==1.3.1
       - cryptography==44.0.0
       - ctransformers==0.2.27
       - cycler==0.12.1
       - cymem==2.0.10
-      #- datadreamer==0.2.0
       - datadreamer-dev==0.38.0
-      - datadreamer
       - datamodel-code-generator==0.26.1
       - datasets==2.21.0
       - decorator==5.1.1
@@ -71,19 +68,16 @@ dependencies:
       - docstring-parser==0.16
       - einops==0.8.0
       - email-validator==2.2.0
-      #- evaluate==0.4.3
-      - evaluate
+      - evaluate==0.4.3
       - faiss-cpu==1.9.0.post1
       - faker==33.1.0
       - filelock==3.16.1
       - flatbuffers==24.3.25
       - fonttools==4.55.2
       - frozenlist==1.5.0
-      #- fsspec==2024.3.1
-      - fsspec
+      - fsspec #==2024.3.1
       - gast==0.6.0
-      #- gcsfs==2024.10.0
-      - gcsfs
+      - gcsfs #==2024.10.0
       - gensim==4.3.3
       - genson==1.3.0
       - google-api-core==2.24.0
@@ -250,12 +244,12 @@ dependencies:
       - threadpoolctl==3.5.0
       - tifffile==2024.9.20
       - tiktoken==0.8.0
-      - tokenizers==0.19.1
+      - tokenizers==0.20.3
       - tomli==2.2.1
       - torch==2.5.1
       - torchvision==0.20.1
       - tqdm==4.67.1
-      - transformers==4.43.0
+      - transformers==4.45.0
       - triton==3.1.0
       - trl==0.9.6
       - typeguard==4.4.1
