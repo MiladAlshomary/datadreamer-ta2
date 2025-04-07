@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def train_datadreamer_ta2_on_hard_batched_data(text_path, output_folder, batches_path,
-                                               luar_model_path, batch_size=1024, epochs=25):
+                                               luar_model_path, batch_size=256, epochs=25):
     """
     Train using hard-batched data loaded from batches.json.
 
@@ -92,3 +92,6 @@ train_datadreamer_ta2_on_hard_batched_data(
     batches_path=batches_path,
     luar_model_path=luar_model_path,
 )
+
+print("Training Completed.")
+sys.stdout.flush()
