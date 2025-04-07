@@ -530,7 +530,7 @@ def get_data_generator_hard_batches(doc_text_dict, batches_path, split):
 
     # Compute total number of examples across all batches.
     num_examples = sum(len(batch) for batch in batches)
-    print(f"Completed: batches loaded. There are {len(batch)} batches and {num_examples} examples in total.")
+    print(f"Completed: batches loaded. There are {len(batches)} batches and {num_examples} examples in total.")
     sys.stdout.flush()
 
     def data_generator():
