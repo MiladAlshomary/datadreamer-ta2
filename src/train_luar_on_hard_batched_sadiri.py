@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def train_datadreamer_ta2_on_hard_batched_data(text_path, output_folder, batches_path,
-                                               luar_model_path, batch_size=1024, epochs=25):
+                                               luar_model_path, batch_size=128, epochs=25):
     """
     Train using hard-batched data loaded from batches.json.
 
@@ -48,11 +48,11 @@ def train_datadreamer_ta2_on_hard_batched_data(text_path, output_folder, batches
         trainer = get_luar_trainer()(
             "LUAR Trainer",
             model_name=luar_model_path,
-            peft_config=LoraConfig(),
+            #peft_config=LoraConfig(),
             trust_remote_code=True,
             device='cuda',
             dtype="bfloat16",
-            force=False,
+            #force=False,
         )
         trainer.train_with_positive_pairs(
             train_anchors=dataset.output["anchors"],
@@ -80,7 +80,7 @@ def train_datadreamer_ta2_on_hard_batched_data(text_path, output_folder, batches
         trainer.export_to_disk(output_folder + 'final_model', adapter_only=False)
 
 
-output_folder = '/mnt/nlpgpu-io1/data/jiachzhu/projects/datadreamer-ta2/output'
+output_folder = '/mnt/nlpgpu-io1/data/jiachzhu/projects/datadreamer-ta2/output3'
 luar_model_path = '/mnt/nlpgpu-io1/data/jiachzhu/projects/model/LUAR-MUD'
 model_op_dir = os.path.join(output_folder, 'sadiri_hard_batch_model_v1')
 batches_path = "/mnt/nlpgpu-io1/data/jiachzhu/projects/datadreamer-ta2/output/{split}_batches.json" # this only store doc id like {'doc1': 'c93d1d1c-3357-2ba8-b604-7a76ffecd66b', 'doc2': '979f7248-6df3-8656-374c-6acfffb98866', 'similarity': 0.15085165411557855, 'genre1': 'Opinion/Argumentation', 'genre2': 'Forum'}
