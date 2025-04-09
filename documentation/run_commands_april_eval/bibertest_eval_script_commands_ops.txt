@@ -1,0 +1,700 @@
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_anchorpos_random_batch_v001/20250402_222244" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_hardpos_rankingloss_random_hardbatching_v001/20250402_193508" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_filtered_org_random_batching_v001" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v002_get_anchorpos_random_batches_20250404_002721" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915" "gte70";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825" "gte70";
+echo -e "\n\n=====================";
+echo "Running gte250";
+echo -e "=====================\n\n";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_anchorpos_random_batch_v001/20250402_222244" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_hardpos_rankingloss_random_hardbatching_v001/20250402_193508" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_filtered_org_random_batching_v001" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v002_get_anchorpos_random_batches_20250404_002721" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448" "gte250";
+
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236" "gte250";
+
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915" "gte250";
+./run_bibertest_eval_script_on_lora_training.sh "sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825" "gte250";
+
+
+
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_anchorpos_random_batch_v001/20250402_222244/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:00:01 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_anchorpos_random_batch_v001_20250402_222244_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.975937
+partial Area Under ROC Curve    0.702794
+Precision                       0.056015
+Recall                          0.165312
+F1                              0.083676
+Equal Error Rate                0.081301
+Detection Cost Function         0.459590
+TAR@0.05                        0.886179
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_anchorpos_random_batch_v001_20250402_222244_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_hardpos_rankingloss_random_hardbatching_v001/20250402_193508/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:02:51 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250402_193508_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.962561
+partial Area Under ROC Curve    0.662732
+Precision                       0.008312
+Recall                          0.563686
+F1                              0.016382
+Equal Error Rate                0.105020
+Detection Cost Function         0.546182
+TAR@0.05                        0.813008
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250402_193508_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_filtered_org_random_batching_v001/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:05:39 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_filtered_org_random_batching_v001_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.974666
+partial Area Under ROC Curve    0.727398
+Precision                       0.088448
+Recall                          0.132791
+F1                              0.106176
+Equal Error Rate                0.089431
+Detection Cost Function         0.426656
+TAR@0.05                        0.872629
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_filtered_org_random_batching_v001_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_get_anchorpos_random_batches_20250404_002721/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:08:26 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v002_get_anchorpos_random_batches_20250404_002721_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.976146
+partial Area Under ROC Curve    0.707807
+Precision                       0.071141
+Recall                          0.143631
+F1                              0.095153
+Equal Error Rate                0.081430
+Detection Cost Function         0.440356
+TAR@0.05                        0.888889
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v002_get_anchorpos_random_batches_20250404_002721_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:11:12 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.961321
+partial Area Under ROC Curve    0.613128
+Precision                       0.006263
+Recall                          0.395664
+F1                              0.012331
+Equal Error Rate                0.105691
+Detection Cost Function         0.630118
+TAR@0.05                        0.794038
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:14:04 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.990831
+partial Area Under ROC Curve    0.808213
+Precision                       1.000000
+Recall                          0.037940
+F1                              0.073107
+Equal Error Rate                0.045594
+Detection Cost Function         0.316792
+TAR@0.05                        0.956640
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:16:52 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.990408
+partial Area Under ROC Curve    0.809386
+Precision                       1.000000
+Recall                          0.046070
+F1                              0.088083
+Equal Error Rate                0.046070
+Detection Cost Function         0.302578
+TAR@0.05                        0.953930
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:19:39 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.989346
+partial Area Under ROC Curve    0.792018
+Precision                       0.900000
+Recall                          0.048780
+F1                              0.092545
+Equal Error Rate                0.048781
+Detection Cost Function         0.344020
+TAR@0.05                        0.948509
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:22:25 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.991442
+partial Area Under ROC Curve    0.832405
+Precision                       0.787879
+Recall                          0.070461
+F1                              0.129353
+Equal Error Rate                0.046319
+Detection Cost Function         0.283091
+TAR@0.05                        0.956640
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:25:12 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.976039
+partial Area Under ROC Curve    0.677464
+Precision                       0.046094
+Recall                          0.159892
+F1                              0.071559
+Equal Error Rate                0.078041
+Detection Cost Function         0.468568
+TAR@0.05                        0.880759
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:28:03 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.974524
+partial Area Under ROC Curve    0.716332
+Precision                       0.103448
+Recall                          0.138211
+F1                              0.118329
+Equal Error Rate                0.089431
+Detection Cost Function         0.457140
+TAR@0.05                        0.875339
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:30:52 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.990736
+partial Area Under ROC Curve    0.815828
+Precision                       1.000000
+Recall                          0.029810
+F1                              0.057895
+Equal Error Rate                0.045718
+Detection Cost Function         0.293665
+TAR@0.05                        0.959350
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:33:39 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.987139
+partial Area Under ROC Curve    0.780333
+Precision                       1.000000
+Recall                          0.032520
+F1                              0.062992
+Equal Error Rate                0.053567
+Detection Cost Function         0.341691
+TAR@0.05                        0.940379
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:36:28 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.990003
+partial Area Under ROC Curve    0.813869
+Precision                       1.000000
+Recall                          0.056911
+F1                              0.107692
+Equal Error Rate                0.045938
+Detection Cost Function         0.299965
+TAR@0.05                        0.956640
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:39:17 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.988085
+partial Area Under ROC Curve    0.780808
+Precision                       1.000000
+Recall                          0.032520
+F1                              0.062992
+Equal Error Rate                0.051591
+Detection Cost Function         0.332544
+TAR@0.05                        0.940379
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:42:05 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.989082
+partial Area Under ROC Curve    0.801572
+Precision                       1.000000
+Recall                          0.043360
+F1                              0.083117
+Equal Error Rate                0.048254
+Detection Cost Function         0.326399
+TAR@0.05                        0.953930
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:44:54 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.990372
+partial Area Under ROC Curve    0.809094
+Precision                       1.000000
+Recall                          0.046070
+F1                              0.088083
+Equal Error Rate                0.045858
+Detection Cost Function         0.309880
+TAR@0.05                        0.953930
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915_eval_op.txt
+Using BIBER doc type: gte70
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:47:43 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825_eval_op.txt ########
+==== Running Biber QC Test gte70 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.992344
+partial Area Under ROC Curve    0.826239
+Precision                       1.000000
+Recall                          0.029810
+F1                              0.057895
+Equal Error Rate                0.045936
+Detection Cost Function         0.285530
+TAR@0.05                        0.967480
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte70_sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825_eval_op.txt
+
+
+=====================
+Running gte250
+=====================
+
+
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_anchorpos_random_batch_v001/20250402_222244/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:50:29 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_anchorpos_random_batch_v001_20250402_222244_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.986717
+partial Area Under ROC Curve    0.785623
+Precision                       0.054575
+Recall                          0.289362
+F1                              0.091830
+Equal Error Rate                0.055319
+Detection Cost Function         0.333203
+TAR@0.05                        0.944681
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_anchorpos_random_batch_v001_20250402_222244_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_hardpos_rankingloss_random_hardbatching_v001/20250402_193508/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:53:53 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250402_193508_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.973408
+partial Area Under ROC Curve    0.704644
+Precision                       0.005621
+Recall                          0.702128
+F1                              0.011153
+Equal Error Rate                0.080865
+Detection Cost Function         0.458785
+TAR@0.05                        0.863830
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250402_193508_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_filtered_org_random_batching_v001/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 05:57:17 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_filtered_org_random_batching_v001_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.986029
+partial Area Under ROC Curve    0.812981
+Precision                       0.092421
+Recall                          0.212766
+F1                              0.128866
+Equal Error Rate                0.058733
+Detection Cost Function         0.320783
+TAR@0.05                        0.931915
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_filtered_org_random_batching_v001_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_get_anchorpos_random_batches_20250404_002721/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:00:41 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v002_get_anchorpos_random_batches_20250404_002721_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.987969
+partial Area Under ROC Curve    0.789388
+Precision                       0.059444
+Recall                          0.263830
+F1                              0.097027
+Equal Error Rate                0.055113
+Detection Cost Function         0.328865
+TAR@0.05                        0.944681
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v002_get_anchorpos_random_batches_20250404_002721_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:04:05 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.966431
+partial Area Under ROC Curve    0.652155
+Precision                       0.004071
+Recall                          0.587234
+F1                              0.008086
+Equal Error Rate                0.093480
+Detection Cost Function         0.591375
+TAR@0.05                        0.787234
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:07:30 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.994310
+partial Area Under ROC Curve    0.879755
+Precision                       0.863636
+Recall                          0.080851
+F1                              0.147860
+Equal Error Rate                0.041979
+Detection Cost Function         0.225414
+TAR@0.05                        0.974468
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:10:57 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.994093
+partial Area Under ROC Curve    0.877678
+Precision                       0.857143
+Recall                          0.076596
+F1                              0.140625
+Equal Error Rate                0.038841
+Detection Cost Function         0.222495
+TAR@0.05                        0.961702
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:14:22 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.993446
+partial Area Under ROC Curve    0.852439
+Precision                       0.741935
+Recall                          0.097872
+F1                              0.172932
+Equal Error Rate                0.038298
+Detection Cost Function         0.240902
+TAR@0.05                        0.970213
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:17:51 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.993736
+partial Area Under ROC Curve    0.883624
+Precision                       0.931034
+Recall                          0.114894
+F1                              0.204545
+Equal Error Rate                0.042264
+Detection Cost Function         0.221263
+TAR@0.05                        0.970213
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:21:15 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.986403
+partial Area Under ROC Curve    0.747103
+Precision                       0.039306
+Recall                          0.289362
+F1                              0.069211
+Equal Error Rate                0.051064
+Detection Cost Function         0.360652
+TAR@0.05                        0.948936
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448_eval_op.txt
+
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:31:14 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.984777
+partial Area Under ROC Curve    0.789020
+Precision                       0.096979
+Recall                          0.259574
+F1                              0.141204
+Equal Error Rate                0.059811
+Detection Cost Function         0.341600
+TAR@0.05                        0.931915
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:38:44 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.994346
+partial Area Under ROC Curve    0.882790
+Precision                       0.842105
+Recall                          0.068085
+F1                              0.125984
+Equal Error Rate                0.042553
+Detection Cost Function         0.207355
+TAR@0.05                        0.965957
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:42:10 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.993064
+partial Area Under ROC Curve    0.853939
+Precision                       0.869565
+Recall                          0.085106
+F1                              0.155039
+Equal Error Rate                0.046483
+Detection Cost Function         0.238217
+TAR@0.05                        0.970213
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:45:36 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.993884
+partial Area Under ROC Curve    0.873155
+Precision                       0.782609
+Recall                          0.076596
+F1                              0.139535
+Equal Error Rate                0.038298
+Detection Cost Function         0.226091
+TAR@0.05                        0.970213
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:49:02 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.993325
+partial Area Under ROC Curve    0.853996
+Precision                       0.818182
+Recall                          0.076596
+F1                              0.140078
+Equal Error Rate                0.042553
+Detection Cost Function         0.235045
+TAR@0.05                        0.978723
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:52:29 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.993724
+partial Area Under ROC Curve    0.866212
+Precision                       0.857143
+Recall                          0.076596
+F1                              0.140625
+Equal Error Rate                0.039339
+Detection Cost Function         0.233671
+TAR@0.05                        0.970213
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:55:55 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.994100
+partial Area Under ROC Curve    0.879657
+Precision                       0.869565
+Recall                          0.085106
+F1                              0.155039
+Equal Error Rate                0.038298
+Detection Cost Function         0.213691
+TAR@0.05                        0.961702
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915_eval_op.txt
+Using BIBER doc type: gte250
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 06:59:21 PM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825_eval_op.txt ########
+==== Running Biber QC Test gte250 Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.995423
+partial Area Under ROC Curve    0.895774
+Precision                       0.904762
+Recall                          0.080851
+F1                              0.148438
+Equal Error Rate                0.037776
+Detection Cost Function         0.198662
+TAR@0.05                        0.982979
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/bibertest_gte250_sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825_eval_op.txt

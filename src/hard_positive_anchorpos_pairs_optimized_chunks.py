@@ -108,4 +108,4 @@ print(f"[{time.time() - start_time:.2f}s] Grouped author, anchors and sampled ca
 # -----------------------------
 print(f"[{time.time() - start_time:.2f}s] Final sampled result shape: {fin_ans.shape}")
 # Save or return as needed
-fin_ans.to_json("final_pairs.jsonl", orient="records", lines=True, force_ascii=False)
+fin_ans.to_json("/data/araghavan/HIATUS/datadreamer-ta2/data/ta2_jan_2025_trian_data/trainsadiri_luarmud_chunks/train_sadiri_luarmud_embeddings_hard_pos_pairs.jsonl", orient="records", lines=True, force_ascii=False)

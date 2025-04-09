@@ -1,0 +1,129 @@
+Parent Dir: /data/araghavan/HIATUS/datadreamer-ta2/data/ta2_jan_2025_trian_data/
+
+trainsadiri_luarmud_chunks/train_sadiri_processed_with_luarembeddings_wo_ao3_filtered_x_n.jsonl:
+    Description: Generates LUAR embeddings on fullText of Sadiri Dataset
+    Creation:
+        1. train_sadiri_processed_with_embeddings_wo_ao3_filtered
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/generate_luarmud_emb_create_chunk.py
+
+
+train_sadiri_processed_with_luarsbertembeddings_wo_ao3_filtered.jsonl
+    Description: In addition to Sadiri Dataset containing SBERT embeddings, LUAR Embeddings are added
+    Creation:
+        1. train_sadiri_processed_with_embeddings_wo_ao3_filtered
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/generate_luarmud_emb_create_chunk.py
+        2. trainsadiri_luarmud_chunks/train_sadiri_processed_with_luarembeddings_wo_ao3_filtered_x_n.jsonl
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/merge_luarmud_sbert_emb_to_train_doc.ipynb
+
+
+anchor_pos_train_sadiri_luarmudsbertamllv2.jsonl
+    Title: Sadiri Soft Anchor-Pos
+    Description:
+        - Sem Embeddings (SBERT), Sty Embeddings (LUAR), Doc Genre (not biber genre)
+        - Dedup Symmetric Anchor-Pos pairs
+        - Different genre of anchors-pos docs
+        - No threshold on sty/sem similarity
+    Creation:
+        1. train_sadiri_processed_with_embeddings_wo_ao3_filtered
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/generate_luarmud_emb_create_chunk.py
+        2. trainsadiri_luarmud_chunks/train_sadiri_processed_with_luarembeddings_wo_ao3_filtered_x_n.jsonl
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/merge_luarmud_sbert_emb_to_train_doc.ipynb
+        3. train_sadiri_processed_with_luarsbertembeddings_wo_ao3_filtered.jsonl
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/hard_batching_v2.ipynb
+
+
+train_sadiri_hardmixbatches_1743775820.jsonl
+    Title: Cached Hard Mix Batching Sadiri Soft Anchor-Pos
+    Description:
+        - Using no filtered anchor-pos pairs with sty, sem embeddings
+        - Within a batch, constructs:
+            * 30% query pairs with Semantic Similarity threshold < 0.1
+            * 30% candidate pairs with Sty Similarity threshold > 0.3 [Uses FAISS Search]
+            * 40% random pairs
+        - Does not explicitly check for genre, within query author overlaps, random 
+        - Ensures candidate pairs not have same query authors, random pairs not have same query, candidate authors
+    Creation:
+        1. train_sadiri_processed_with_embeddings_wo_ao3_filtered
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/generate_luarmud_emb_create_chunk.py
+        2. trainsadiri_luarmud_chunks/train_sadiri_processed_with_luarembeddings_wo_ao3_filtered_x_n.jsonl
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/merge_luarmud_sbert_emb_to_train_doc.ipynb
+        3. train_sadiri_processed_with_luarsbertembeddings_wo_ao3_filtered.jsonl
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/hard_batching_v2.ipynb
+        4. anchor_pos_train_sadiri_luarmudsbertamllv2.jsonl
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/create_cached_hardbatches_pipeline.ipynb [Sadiri Hard Mix Batches section]
+
+
+trainsadiri_luarmud_chunks/train_sadiri_luarmud_embeddings_hard_pos_pairs.jsonl
+    Title: Sadiri Hard Sty Anchor-Pos
+    Description:
+        - Sty Embeddings (LUAR), Doc Genre (not biber genre)
+        - Dedup Symmetric Anchor-Pos pairs
+        - Different genre of anchors-pos docs 
+        - Sty Similarity threshold of 0.4
+    Creation:
+        1. train_sadiri_processed_with_embeddings_wo_ao3_filtered
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/generate_luarmud_emb_create_chunk.py
+        2. trainsadiri_luarmud_chunks/train_sadiri_processed_with_luarembeddings_wo_ao3_filtered_x_n.jsonl
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/hard_positive_anchorpos_pairs_optimized_chunks.py
+
+
+hard_batching_dataset_luaremb_wo_ao3_filtered/train_sadiri_hard_batches_v001.jsonl
+    Title: Cached Hard Sty Batching Sadiri Hard Sty Anchor-Pos
+    Description:
+        - For one query anchor-pos, uses FAISS to search batch_size - 1 candidate anchor-pos
+        - Hard Anchor-Pairs (Sty Similarity threshold 0.4, Dedup Symmetric pairs, different genre pairs) [Refer to train_sadiri_luarmud_embeddings_hard_pos_pairs.jsonl Description]
+    Creation:
+        1. train_sadiri_processed_with_embeddings_wo_ao3_filtered
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/generate_luarmud_emb_create_chunk.py
+        2. trainsadiri_luarmud_chunks/train_sadiri_processed_with_luarembeddings_wo_ao3_filtered_x_n.jsonl
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/hard_positive_anchorpos_pairs_optimized_chunks.py
+        3. trainsadiri_luarmud_chunks/train_sadiri_luarmud_embeddings_hard_pos_pairs.jsonl
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/hard_batching_from_achorpos_pairs_pipeline.ipynb
+
+
+
+Parent Path: /data/araghavan/HIATUS/datadreamer-ta2/data/biber/genre_data/
+
+biber_train_luar_sbert_genre_embeddings_v001.jsonl
+    Title: Biber Train Dataset
+    Description:
+    - Biber Train dataset with Biber genre, Sty Embeddings (LUAR), Sem Embeddings (SBERT) at doc level
+    Creation:
+        1.a. train_documents.jsonl
+        1.b. final_train.csv
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/generate_luar_sbert_genre_emb_biber.py
+
+biber_train_anchorpos_raw_v001.jsonl
+    Title: Biber Train Soft Anchor-Pos
+    Description:
+        - Biber Train dataset anchor-pos pairs with Sty Embeddings, Sem Embeddings, Biber genre
+        - No Dedup of Symmetric Anchor-Pos pairs
+        - Different biber genre of anchor-pos pairs
+        - No Sty, Sem Embeddings similarity thresholds
+    Creation:
+        1.a. train_documents.jsonl
+        1.b. final_train.csv
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/generate_luar_sbert_genre_emb_biber.py
+        2. biber_train_luar_sbert_genre_embeddings_v001.jsonl
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/create_cached_hardbatches_pipeline.ipynb [Biber Anchor - Pos Pairs section]
+
+biber_train_sadiri_anchorpos_cachedhardmixbatches_epochs3.jsonl
+    Title: Cached Hard Mix Batching Biber Train Anchor-Pos 
+    Description:
+        - Using no filtered anchor-pos pairs with sty, sem embeddings
+        - Within a batch, constructs:
+            * 30% unique author query pairs with Semantic Similarity threshold and random genre anchor
+            * 30% unique author candidate pairs with Sty Similarity threshold [Uses FAISS Search]
+            * 40% unique author random pairs
+        - Constructs for 3 epochs with varying thresholds, seeds:
+            * Epoch 1- Sem: <0.2  , Sty: >0.3
+            * Epoch 2- Sem: <0.05 , Sty: >0.4
+            * Epoch 3- Sem: <0    , Sty: >0.5
+    Creation:
+        1.a. train_documents.jsonl
+        1.b. final_train.csv
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/generate_luar_sbert_genre_emb_biber.py
+        2. biber_train_luar_sbert_genre_embeddings_v001.json
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/create_cached_hardbatches_pipeline.ipynb [Biber Anchor - Pos Pairs section]
+        3. biber_train_anchorpos_raw_v001.jsonl 
+            > Script: /data/araghavan/HIATUS/datadreamer-ta2/src/create_cached_hardbatches_pipeline.ipynb [Biber 3 Epochs Cached Hard Mix Batches section]

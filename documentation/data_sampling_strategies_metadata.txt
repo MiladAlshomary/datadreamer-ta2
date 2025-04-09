@@ -1,0 +1,29 @@
+Data Sampling Strategies For Training
+Implemented in the script /data/araghavan/HIATUS/datadreamer-ta2/src/train_luar_on_sadiri_batchingvariations.py
+< As of 004/09/2025>
+1. "get_samplinganchorpos_random_batches"
+    Description: 
+        - Doc Level Dataset as Input
+        - Aggregation of Docs at Author level
+        - Select random 2 docs as Anchor-Pos
+
+2. "get_anchorpos_random_batches"
+    Description:
+        - Anchor-Pos Pairs Dataset as Input
+        - Aggregation of Pairs at Author level
+        - Select random 1 Anchor-Pos pair
+    
+    Difference from Sampling:
+        - Gives importance to filters/conditions set on Anchor-Pos pairs
+        - More controlled hard positive filtering due to predetermined Anchor-Pos pairs
+
+3. "get_anchorpos_cached_hardbatches"
+    Description: 
+        - Cached Anchor-Pos Pairs with batch_id in Dataset as Input
+        - Requires a curated batched file [can be made hard or soft based on curation logic]
+        - No aggregation at Author level
+        - Randomly selects batch_id
+    
+    Difference from previous random sampling:
+        - Heavily dependent on the logic set forth in creating the cached batches
+        - Randomness across batches instead of within [due to predetermined batch_id value to anchor-pos pair]

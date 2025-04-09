@@ -1,0 +1,344 @@
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_anchorpos_random_batch_v001/20250402_222244";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_hardpos_rankingloss_random_hardbatching_v001/20250402_193508";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_filtered_org_random_batching_v001";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v002_get_anchorpos_random_batches_20250404_002721";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208";
+./run_p1p2dev_eval_script_on_lora_training.sh  "sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915";
+./run_p1p2dev_eval_script_on_lora_training.sh "sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825";
+
+
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_anchorpos_random_batch_v001/20250402_222244/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:23:56 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_anchorpos_random_batch_v001_20250402_222244_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.897255
+partial Area Under ROC Curve    0.583703
+Precision                       0.092857
+Recall                          0.076923
+F1                              0.084142
+Equal Error Rate                0.165681
+Detection Cost Function         0.829751
+TAR@0.05                        0.585799
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_anchorpos_random_batch_v001_20250402_222244_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_hardpos_rankingloss_random_hardbatching_v001/20250402_193508/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:24:35 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250402_193508_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.864663
+partial Area Under ROC Curve    0.576530
+Precision                       0.015263
+Recall                          0.183432
+F1                              0.028182
+Equal Error Rate                0.189610
+Detection Cost Function         0.857874
+TAR@0.05                        0.514793
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250402_193508_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_filtered_org_random_batching_v001/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:25:12 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_filtered_org_random_batching_v001_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.894492
+partial Area Under ROC Curve    0.583237
+Precision                       0.166667
+Recall                          0.023669
+F1                              0.041451
+Equal Error Rate                0.165681
+Detection Cost Function         0.820149
+TAR@0.05                        0.591716
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_filtered_org_random_batching_v001_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_get_anchorpos_random_batches_20250404_002721/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:25:49 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v002_get_anchorpos_random_batches_20250404_002721_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.897762
+partial Area Under ROC Curve    0.603699
+Precision                       0.148936
+Recall                          0.082840
+F1                              0.106464
+Equal Error Rate                0.176977
+Detection Cost Function         0.777226
+TAR@0.05                        0.609467
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v002_get_anchorpos_random_batches_20250404_002721_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:26:26 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.875640
+partial Area Under ROC Curve    0.588531
+Precision                       0.029460
+Recall                          0.106509
+F1                              0.046154
+Equal Error Rate                0.178491
+Detection Cost Function         0.791418
+TAR@0.05                        0.544379
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:27:41 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.891391
+partial Area Under ROC Curve    0.577036
+Precision                       0.166667
+Recall                          0.005917
+F1                              0.011429
+Equal Error Rate                0.201142
+Detection Cost Function         0.869264
+TAR@0.05                        0.467456
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:28:18 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.910859
+partial Area Under ROC Curve    0.585228
+Precision                       0.500000
+Recall                          0.005917
+F1                              0.011696
+Equal Error Rate                0.189284
+Detection Cost Function         0.854461
+TAR@0.05                        0.479290
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:28:55 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.907917
+partial Area Under ROC Curve    0.577743
+Precision                       0.176471
+Recall                          0.017751
+F1                              0.032258
+Equal Error Rate                0.189349
+Detection Cost Function         0.828802
+TAR@0.05                        0.532544
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:29:33 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.915057
+partial Area Under ROC Curve    0.587384
+Precision                       0.300000
+Recall                          0.017751
+F1                              0.033520
+Equal Error Rate                0.176734
+Detection Cost Function         0.827431
+TAR@0.05                        0.526627
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:30:09 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.902589
+partial Area Under ROC Curve    0.601061
+Precision                       0.191489
+Recall                          0.053254
+F1                              0.083333
+Equal Error Rate                0.155247
+Detection Cost Function         0.740278
+TAR@0.05                        0.639053
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:30:47 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.892548
+partial Area Under ROC Curve    0.602415
+Precision                       0.169492
+Recall                          0.059172
+F1                              0.087719
+Equal Error Rate                0.171598
+Detection Cost Function         0.781826
+TAR@0.05                        0.633136
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:31:25 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.914108
+partial Area Under ROC Curve    0.591477
+Precision                       0.500000
+Recall                          0.005917
+F1                              0.011696
+Equal Error Rate                0.183431
+Detection Cost Function         0.826468
+TAR@0.05                        0.514793
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:32:03 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.905344
+partial Area Under ROC Curve    0.585342
+Precision                       0.250000
+Recall                          0.005917
+F1                              0.011561
+Equal Error Rate                0.178193
+Detection Cost Function         0.852504
+TAR@0.05                        0.491124
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:32:42 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.911867
+partial Area Under ROC Curve    0.582148
+Precision                       0.333333
+Recall                          0.005917
+F1                              0.011628
+Equal Error Rate                0.178640
+Detection Cost Function         0.851046
+TAR@0.05                        0.514793
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:33:19 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.905388
+partial Area Under ROC Curve    0.583524
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.183431
+Detection Cost Function         0.848890
+TAR@0.05                        0.485207
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:33:57 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.913168
+partial Area Under ROC Curve    0.587015
+Precision                       0.500000
+Recall                          0.005917
+F1                              0.011696
+Equal Error Rate                0.178255
+Detection Cost Function         0.852488
+TAR@0.05                        0.520710
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:34:34 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.913606
+partial Area Under ROC Curve    0.586918
+Precision                       0.500000
+Recall                          0.005917
+F1                              0.011696
+Equal Error Rate                0.183871
+Detection Cost Function         0.847590
+TAR@0.05                        0.491124
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915_eval_op.txt
+
+Copying Model Checkpoint to LoRA Checkpoint Directory
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Evaluation Started at Tue Apr  8 11:35:12 AM EDT 2025 ====
+Writing to log file: ######## /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825_eval_op.txt ########
+==== Running P1 and P2 DEV Eval (RUN_ID=14) ====
+                ==== Eval Completed ====
+
+==== Displaying metrics... ====
+Area Under ROC Curve            0.902865
+partial Area Under ROC Curve    0.575921
+Precision                       0.333333
+Recall                          0.011834
+F1                              0.022857
+Equal Error Rate                0.193870
+Detection Cost Function         0.868354
+TAR@0.05                        0.497041
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/p1p2dev_sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825_eval_op.txt

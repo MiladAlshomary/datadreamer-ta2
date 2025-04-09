@@ -1,0 +1,1046 @@
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_anchorpos_random_batch_v001/20250402_222244";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_hardpos_rankingloss_random_hardbatching_v001/20250402_193508";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_filtered_org_random_batching_v001";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v002_get_anchorpos_random_batches_20250404_002721";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915";
+./run_hrs112224_eval_script_on_lora_training.sh "sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825";
+
+
+==== HRS Evaluation Started at Tue Apr  8 10:01:19 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_anchorpos_random_batch_v001_20250402_222244_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_anchorpos_random_batch_v001/20250402_222244/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999735
+partial Area Under ROC Curve    0.986679
+Precision                       0.288462
+Recall                          0.416667
+F1                              0.340909
+Equal Error Rate                0.001550
+Detection Cost Function         0.030683
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.995400
+partial Area Under ROC Curve    0.852260
+Precision                       0.250000
+Recall                          0.052632
+F1                              0.086957
+Equal Error Rate                0.043320
+Detection Cost Function         0.176053
+TAR@0.05                        0.947368
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.996574
+partial Area Under ROC Curve    0.911723
+Precision                       1.000000
+Recall                          0.083333
+F1                              0.153846
+Equal Error Rate                0.041667
+Detection Cost Function         0.117266
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.996376
+partial Area Under ROC Curve    0.875044
+Precision                       1.000000
+Recall                          0.100000
+F1                              0.181818
+Equal Error Rate                0.029584
+Detection Cost Function         0.195112
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.997021
+partial Area Under ROC Curve:  0.906426
+Precision:                     0.634615
+Recall:                        0.163158
+F1:                            0.190883
+Equal Error Rate:              0.0290303
+Detection Cost Function:       0.129778
+TAR@0.05:                      0.961148
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 10:09:30 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_hardpos_rankingloss_random_hardbatching_v001_20250402_193508_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_hardpos_rankingloss_random_hardbatching_v001/20250402_193508/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999377
+partial Area Under ROC Curve    0.968675
+Precision                       0.001518
+Recall                          1.000000
+F1                              0.003031
+Equal Error Rate                0.003928
+Detection Cost Function         0.075835
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.989480
+partial Area Under ROC Curve    0.743022
+Precision                       0.000962
+Recall                          1.000000
+F1                              0.001922
+Equal Error Rate                0.050338
+Detection Cost Function         0.303785
+TAR@0.05                        0.947368
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.989042
+partial Area Under ROC Curve    0.853580
+Precision                       0.020916
+Recall                          0.875000
+F1                              0.040856
+Equal Error Rate                0.074176
+Detection Cost Function         0.266473
+TAR@0.05                        0.875000
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.978793
+partial Area Under ROC Curve    0.763182
+Precision                       0.015152
+Recall                          0.733333
+F1                              0.029690
+Equal Error Rate                0.097046
+Detection Cost Function         0.386289
+TAR@0.05                        0.833333
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.989173
+partial Area Under ROC Curve:  0.832115
+Precision:                     0.009637
+Recall:                        0.902083
+F1:                            0.0188748
+Equal Error Rate:              0.056372
+Detection Cost Function:       0.258096
+TAR@0.05:                      0.906981
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 10:17:43 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_filtered_org_random_batching_v001_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_filtered_org_random_batching_v001/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999653
+partial Area Under ROC Curve    0.982551
+Precision                       0.283019
+Recall                          0.416667
+F1                              0.337079
+Equal Error Rate                0.001774
+Detection Cost Function         0.035120
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.991719
+partial Area Under ROC Curve    0.776476
+Precision                       0.111111
+Recall                          0.052632
+F1                              0.071429
+Equal Error Rate                0.048078
+Detection Cost Function         0.315947
+TAR@0.05                        0.947368
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.998330
+partial Area Under ROC Curve    0.919014
+Precision                       1.000000
+Recall                          0.083333
+F1                              0.153846
+Equal Error Rate                0.005410
+Detection Cost Function         0.107125
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.994885
+partial Area Under ROC Curve    0.908809
+Precision                       1.000000
+Recall                          0.066667
+F1                              0.125000
+Equal Error Rate                0.040807
+Detection Cost Function         0.163151
+TAR@0.05                        0.933333
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.996147
+partial Area Under ROC Curve:  0.896713
+Precision:                     0.598533
+Recall:                        0.154825
+F1:                            0.171839
+Equal Error Rate:              0.0240173
+Detection Cost Function:       0.155336
+TAR@0.05:                      0.952814
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 10:25:55 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v002_get_anchorpos_random_batches_20250404_002721_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_get_anchorpos_random_batches_20250404_002721/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999808
+partial Area Under ROC Curve    0.990364
+Precision                       0.281250
+Recall                          0.500000
+F1                              0.360000
+Equal Error Rate                0.001000
+Detection Cost Function         0.019802
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.994249
+partial Area Under ROC Curve    0.866387
+Precision                       0.125000
+Recall                          0.052632
+F1                              0.074074
+Equal Error Rate                0.042750
+Detection Cost Function         0.214227
+TAR@0.05                        0.947368
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.997130
+partial Area Under ROC Curve    0.880104
+Precision                       0.800000
+Recall                          0.166667
+F1                              0.275862
+Equal Error Rate                0.008840
+Detection Cost Function         0.175038
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.993415
+partial Area Under ROC Curve    0.848026
+Precision                       1.000000
+Recall                          0.133333
+F1                              0.235294
+Equal Error Rate                0.037599
+Detection Cost Function         0.231919
+TAR@0.05                        0.933333
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.996151
+partial Area Under ROC Curve:  0.89622
+Precision:                     0.551562
+Recall:                        0.213158
+F1:                            0.236307
+Equal Error Rate:              0.0225473
+Detection Cost Function:       0.160246
+TAR@0.05:                      0.952814
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 10:34:13 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.998173
+partial Area Under ROC Curve    0.931820
+Precision                       0.001763
+Recall                          1.000000
+F1                              0.003520
+Equal Error Rate                0.027223
+Detection Cost Function         0.128913
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.978545
+partial Area Under ROC Curve    0.712867
+Precision                       0.001538
+Recall                          0.789474
+F1                              0.003071
+Equal Error Rate                0.065088
+Detection Cost Function         0.435701
+TAR@0.05                        0.842105
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.990795
+partial Area Under ROC Curve    0.825238
+Precision                       0.032990
+Recall                          0.666667
+F1                              0.062868
+Equal Error Rate                0.041667
+Detection Cost Function         0.312061
+TAR@0.05                        0.916667
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.977484
+partial Area Under ROC Curve    0.745523
+Precision                       0.025189
+Recall                          0.666667
+F1                              0.048544
+Equal Error Rate                0.068755
+Detection Cost Function         0.423333
+TAR@0.05                        0.833333
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.986249
+partial Area Under ROC Curve:  0.803862
+Precision:                     0.01537
+Recall:                        0.780702
+F1:                            0.0295007
+Equal Error Rate:              0.0506832
+Detection Cost Function:       0.325002
+TAR@0.05:                      0.891082
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 10:42:29 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999796
+partial Area Under ROC Curve    0.989770
+Precision                       0.267857
+Recall                          0.416667
+F1                              0.326087
+Equal Error Rate                0.001500
+Detection Cost Function         0.029696
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.991210
+partial Area Under ROC Curve    0.865505
+Precision                       0.500000
+Recall                          0.052632
+F1                              0.095238
+Equal Error Rate                0.052632
+Detection Cost Function         0.225720
+TAR@0.05                        0.894737
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.996641
+partial Area Under ROC Curve    0.892941
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.040383
+Detection Cost Function         0.144556
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.998416
+partial Area Under ROC Curve    0.920407
+Precision                       1.000000
+Recall                          0.033333
+F1                              0.064516
+Equal Error Rate                0.004927
+Detection Cost Function         0.097563
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.996516
+partial Area Under ROC Curve:  0.917156
+Precision:                     0.441964
+Recall:                        0.125658
+F1:                            0.12146
+Equal Error Rate:              0.0248605
+Detection Cost Function:       0.124384
+TAR@0.05:                      0.94799
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 10:50:46 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999777
+partial Area Under ROC Curve    0.988811
+Precision                       0.300000
+Recall                          0.583333
+F1                              0.396226
+Equal Error Rate                0.001143
+Detection Cost Function         0.022636
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.991839
+partial Area Under ROC Curve    0.846732
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.052632
+Detection Cost Function         0.190847
+TAR@0.05                        0.894737
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.995178
+partial Area Under ROC Curve    0.861720
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.041191
+Detection Cost Function         0.188262
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.998501
+partial Area Under ROC Curve    0.924693
+Precision                       1.000000
+Recall                          0.033333
+F1                              0.064516
+Equal Error Rate                0.004450
+Detection Cost Function         0.088109
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.996324
+partial Area Under ROC Curve:  0.905489
+Precision:                     0.325
+Recall:                        0.154166
+F1:                            0.115186
+Equal Error Rate:              0.024854
+Detection Cost Function:       0.122464
+TAR@0.05:                      0.94799
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 10:59:05 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999841
+partial Area Under ROC Curve    0.992014
+Precision                       0.296296
+Recall                          0.444444
+F1                              0.355556
+Equal Error Rate                0.000940
+Detection Cost Function         0.018620
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.987718
+partial Area Under ROC Curve    0.874389
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.095190
+Detection Cost Function         0.192892
+TAR@0.05                        0.842105
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.993491
+partial Area Under ROC Curve    0.822153
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.040035
+Detection Cost Function         0.280276
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.997089
+partial Area Under ROC Curve    0.892941
+Precision                       1.000000
+Recall                          0.066667
+F1                              0.125000
+Equal Error Rate                0.033034
+Detection Cost Function         0.139216
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.994535
+partial Area Under ROC Curve:  0.895374
+Precision:                     0.324074
+Recall:                        0.127778
+F1:                            0.120139
+Equal Error Rate:              0.0422997
+Detection Cost Function:       0.157751
+TAR@0.05:                      0.934832
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 11:07:21 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999782
+partial Area Under ROC Curve    0.989042
+Precision                       0.231579
+Recall                          0.611111
+F1                              0.335878
+Equal Error Rate                0.001021
+Detection Cost Function         0.020223
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.978234
+partial Area Under ROC Curve    0.777236
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.105263
+Detection Cost Function         0.334931
+TAR@0.05                        0.842105
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.993012
+partial Area Under ROC Curve    0.842301
+Precision                       1.000000
+Recall                          0.083333
+F1                              0.153846
+Equal Error Rate                0.040637
+Detection Cost Function         0.268405
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.997382
+partial Area Under ROC Curve    0.911347
+Precision                       1.000000
+Recall                          0.133333
+F1                              0.235294
+Equal Error Rate                0.030297
+Detection Cost Function         0.142171
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.992102
+partial Area Under ROC Curve:  0.879981
+Precision:                     0.557895
+Recall:                        0.206944
+F1:                            0.181255
+Equal Error Rate:              0.0443045
+Detection Cost Function:       0.191433
+TAR@0.05:                      0.934832
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 11:15:34 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999788
+partial Area Under ROC Curve    0.989338
+Precision                       0.264368
+Recall                          0.638889
+F1                              0.373984
+Equal Error Rate                0.001964
+Detection Cost Function         0.034821
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.991033
+partial Area Under ROC Curve    0.852228
+Precision                       0.086957
+Recall                          0.105263
+F1                              0.095238
+Equal Error Rate                0.052632
+Detection Cost Function         0.269732
+TAR@0.05                        0.894737
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.996204
+partial Area Under ROC Curve    0.909819
+Precision                       0.833333
+Recall                          0.208333
+F1                              0.333333
+Equal Error Rate                0.040320
+Detection Cost Function         0.170798
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.994458
+partial Area Under ROC Curve    0.877590
+Precision                       1.000000
+Recall                          0.166667
+F1                              0.285714
+Equal Error Rate                0.033333
+Detection Cost Function         0.199902
+TAR@0.05                        0.933333
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.995371
+partial Area Under ROC Curve:  0.907244
+Precision:                     0.546164
+Recall:                        0.279788
+F1:                            0.272067
+Equal Error Rate:              0.0320623
+Detection Cost Function:       0.168813
+TAR@0.05:                      0.939656
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 11:23:49 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999284
+partial Area Under ROC Curve    0.981459
+Precision                       0.255102
+Recall                          0.694444
+F1                              0.373134
+Equal Error Rate                0.025144
+Detection Cost Function         0.030919
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.993834
+partial Area Under ROC Curve    0.847248
+Precision                       0.133333
+Recall                          0.105263
+F1                              0.117647
+Equal Error Rate                0.043893
+Detection Cost Function         0.292531
+TAR@0.05                        0.947368
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.995079
+partial Area Under ROC Curve    0.913342
+Precision                       0.750000
+Recall                          0.250000
+F1                              0.375000
+Equal Error Rate                0.041667
+Detection Cost Function         0.160187
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.996588
+partial Area Under ROC Curve    0.900372
+Precision                       1.000000
+Recall                          0.166667
+F1                              0.285714
+Equal Error Rate                0.033333
+Detection Cost Function         0.127367
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.996196
+partial Area Under ROC Curve:  0.910605
+Precision:                     0.534609
+Recall:                        0.304094
+F1:                            0.287874
+Equal Error Rate:              0.0360092
+Detection Cost Function:       0.152751
+TAR@0.05:                      0.961148
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 11:32:02 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999736
+partial Area Under ROC Curve    0.986752
+Precision                       0.254237
+Recall                          0.416667
+F1                              0.315789
+Equal Error Rate                0.001752
+Detection Cost Function         0.034683
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.991758
+partial Area Under ROC Curve    0.834197
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.052771
+Detection Cost Function         0.203226
+TAR@0.05                        0.894737
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.995452
+partial Area Under ROC Curve    0.854230
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.036193
+Detection Cost Function         0.178381
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.998589
+partial Area Under ROC Curve    0.929087
+Precision                       1.000000
+Recall                          0.033333
+F1                              0.064516
+Equal Error Rate                0.002960
+Detection Cost Function         0.058613
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.996384
+partial Area Under ROC Curve:  0.901066
+Precision:                     0.313559
+Recall:                        0.1125
+F1:                            0.0950763
+Equal Error Rate:              0.023419
+Detection Cost Function:       0.118726
+TAR@0.05:                      0.94799
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 11:40:18 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999729
+partial Area Under ROC Curve    0.986382
+Precision                       0.250000
+Recall                          0.444444
+F1                              0.320000
+Equal Error Rate                0.001450
+Detection Cost Function         0.028708
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.989282
+partial Area Under ROC Curve    0.849949
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.052632
+Detection Cost Function         0.227890
+TAR@0.05                        0.894737
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.996094
+partial Area Under ROC Curve    0.866663
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.038514
+Detection Cost Function         0.176866
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.997512
+partial Area Under ROC Curve    0.909363
+Precision                       1.000000
+Recall                          0.033333
+F1                              0.064516
+Equal Error Rate                0.029342
+Detection Cost Function         0.138515
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.995654
+partial Area Under ROC Curve:  0.903089
+Precision:                     0.3125
+Recall:                        0.119444
+F1:                            0.096129
+Equal Error Rate:              0.0304845
+Detection Cost Function:       0.142995
+TAR@0.05:                      0.94799
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 11:48:35 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999769
+partial Area Under ROC Curve    0.988380
+Precision                       0.253521
+Recall                          0.500000
+F1                              0.336449
+Equal Error Rate                0.001268
+Detection Cost Function         0.025097
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.990596
+partial Area Under ROC Curve    0.835072
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.053403
+Detection Cost Function         0.242837
+TAR@0.05                        0.894737
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.994441
+partial Area Under ROC Curve    0.836065
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.041374
+Detection Cost Function         0.207083
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.998415
+partial Area Under ROC Curve    0.920343
+Precision                       1.000000
+Recall                          0.033333
+F1                              0.064516
+Equal Error Rate                0.004705
+Detection Cost Function         0.084132
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.995805
+partial Area Under ROC Curve:  0.894965
+Precision:                     0.31338
+Recall:                        0.133333
+F1:                            0.100241
+Equal Error Rate:              0.0251875
+Detection Cost Function:       0.139787
+TAR@0.05:                      0.94799
+=========================================
+==== HRS Evaluation Started at Tue Apr  8 11:56:53 PM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999744
+partial Area Under ROC Curve    0.987158
+Precision                       0.241935
+Recall                          0.416667
+F1                              0.306122
+Equal Error Rate                0.001331
+Detection Cost Function         0.026344
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.989284
+partial Area Under ROC Curve    0.857552
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.052632
+Detection Cost Function         0.215542
+TAR@0.05                        0.894737
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.996151
+partial Area Under ROC Curve    0.868321
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.037555
+Detection Cost Function         0.182459
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.997815
+partial Area Under ROC Curve    0.903200
+Precision                       1.000000
+Recall                          0.033333
+F1                              0.064516
+Equal Error Rate                0.008130
+Detection Cost Function         0.147157
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.995749
+partial Area Under ROC Curve:  0.904058
+Precision:                     0.310484
+Recall:                        0.1125
+F1:                            0.0926595
+Equal Error Rate:              0.024912
+Detection Cost Function:       0.142876
+TAR@0.05:                      0.94799
+=========================================
+==== HRS Evaluation Started at Wed Apr  9 12:05:09 AM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999800
+partial Area Under ROC Curve    0.989932
+Precision                       0.238095
+Recall                          0.416667
+F1                              0.303030
+Equal Error Rate                0.000931
+Detection Cost Function         0.018426
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.991030
+partial Area Under ROC Curve    0.854057
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.052632
+Detection Cost Function         0.230643
+TAR@0.05                        0.894737
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.995330
+partial Area Under ROC Curve    0.865940
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.041667
+Detection Cost Function         0.177597
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.998180
+partial Area Under ROC Curve    0.911185
+Precision                       1.000000
+Recall                          0.033333
+F1                              0.064516
+Equal Error Rate                0.005787
+Detection Cost Function         0.114580
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.996085
+partial Area Under ROC Curve:  0.905279
+Precision:                     0.309524
+Recall:                        0.1125
+F1:                            0.0918865
+Equal Error Rate:              0.0252543
+Detection Cost Function:       0.135312
+TAR@0.05:                      0.94799
+=========================================
+==== HRS Evaluation Started at Wed Apr  9 12:13:26 AM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999792
+partial Area Under ROC Curve    0.989533
+Precision                       0.265625
+Recall                          0.472222
+F1                              0.340000
+Equal Error Rate                0.001085
+Detection Cost Function         0.021486
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.992910
+partial Area Under ROC Curve    0.857510
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.052632
+Detection Cost Function         0.178865
+TAR@0.05                        0.894737
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.995114
+partial Area Under ROC Curve    0.866530
+Precision                       0.000000
+Recall                          0.000000
+F1                              0.000000
+Equal Error Rate                0.041484
+Detection Cost Function         0.189517
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.998584
+partial Area Under ROC Curve    0.928831
+Precision                       1.000000
+Recall                          0.033333
+F1                              0.064516
+Equal Error Rate                0.004100
+Detection Cost Function         0.081176
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.9966
+partial Area Under ROC Curve:  0.910601
+Precision:                     0.316406
+Recall:                        0.126389
+F1:                            0.101129
+Equal Error Rate:              0.0248253
+Detection Cost Function:       0.117761
+TAR@0.05:                      0.94799
+=========================================
+==== HRS Evaluation Started at Wed Apr  9 12:21:49 AM EDT 2025 ====
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/hrs_sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825_eval_op.txt
+Running Command: cp -r /data/araghavan/HIATUS/datadreamer-ta2/output/sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825/luar-trainer/_model/. /data/araghavan/HIATUS/pausit-eval-ta2/SIVs/datadreamer_lora/checkpoint
+==== Running hrs1.1 (RUN_ID=14) ====
+        ✅ hrs1.1 Completed
+
+Area Under ROC Curve            0.999790
+partial Area Under ROC Curve    0.989455
+Precision                       0.263158
+Recall                          0.555556
+F1                              0.357143
+Equal Error Rate                0.000830
+Detection Cost Function         0.016435
+TAR@0.05                        0.972222
+==== Running hrs1.2 (RUN_ID=15) ====
+        ✅ hrs1.2 Completed
+
+Area Under ROC Curve            0.988648
+partial Area Under ROC Curve    0.835586
+Precision                       0.200000
+Recall                          0.105263
+F1                              0.137931
+Equal Error Rate                0.052632
+Detection Cost Function         0.223033
+TAR@0.05                        0.894737
+==== Running hrs2.1 (RUN_ID=16) ====
+        ✅ hrs2.1 Completed
+
+Area Under ROC Curve            0.994792
+partial Area Under ROC Curve    0.840046
+Precision                       1.000000
+Recall                          0.041667
+F1                              0.080000
+Equal Error Rate                0.041667
+Detection Cost Function         0.198354
+TAR@0.05                        0.958333
+==== Running hrs2.2 (RUN_ID=17) ====
+        ✅ hrs2.2 Completed
+
+Area Under ROC Curve            0.998296
+partial Area Under ROC Curve    0.917220
+Precision                       1.000000
+Recall                          0.066667
+F1                              0.125000
+Equal Error Rate                0.005844
+Detection Cost Function         0.110350
+TAR@0.05                        0.966667
+==== Averaged Metrics Across All HRS ====
+Area Under ROC Curve:          0.995381
+partial Area Under ROC Curve:  0.895577
+Precision:                     0.615789
+Recall:                        0.192288
+F1:                            0.175018
+Equal Error Rate:              0.0252432
+Detection Cost Function:       0.137043
+TAR@0.05:                      0.94799
+=========================================

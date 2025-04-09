@@ -118,15 +118,13 @@ python -u main.py  --input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/
 
 
 ###### Hard Batching Techniques
-
-
 ## Anchor Positive File, Random Batching
 python train_luar_on_sadiri_batchingvariations.py \
     --train_file_path "../data/ta2_jan_2025_trian_data/anchor_pos_train_sadiri_luarmudsbertamllv2.jsonl" \
     --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
     --type_ "get_anchorpos_random_batches" \
     --model_op_dir_name "sadiri_anchorpos_random_batch_v001"
-./run_eval_script_on_lora_training.sh "sadiri_anchorpos_random_batch_v001/20250402_222244"
+./run_kfold_eval_script_on_lora_training.sh "sadiri_anchorpos_random_batch_v001/20250402_222244"
 
 ## RankingLoss, Random Hard Batching
 python train_luar_on_sadiri_batchingvariations.py \
@@ -134,39 +132,26 @@ python train_luar_on_sadiri_batchingvariations.py \
     --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
     --type_ "anchorpos_rankingloss_hardbatches" \
     --model_op_dir_name "sadiri_hardpos_rankingloss_random_hardbatching_v001"
-./run_eval_script_on_lora_training.sh "sadiri_hardpos_rankingloss_random_hardbatching_v001/20250402_193508"
-
-## Anchor Positive File, Hard Mix Batching
-CUDA_VISIBLE_DEVICES=2 python train_luar_on_sadiri_hardmixbatching.py \
-    --train_file_path "../data/ta2_jan_2025_trian_data/anchor_pos_train_sadiri_luarmudsbertamllv2.jsonl" \
-    --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
-    --type_ "get_anchorpos_hardmix_batches" \
-    --model_op_dir_name "sadiri_anchorpos_hardmix_batch_v001" \
-    --sem_sim_threshold 0.1 --sty_sim_threshold 0.2
+./run_kfold_eval_script_on_lora_training.sh "sadiri_hardpos_rankingloss_random_hardbatching_v001/20250402_193508"
 
 ## Sadiri Filtered Original File, Random Batching - sadiri_filtered_org_random_batching_v001
 <ensure the values are changed in file: 
 python train_luar_on_sadiri.py
-./run_eval_script_on_lora_training.sh "sadiri_filtered_org_random_batching_v001"
-
-
-
-
-
-
-
-
-
-
-
-
-
-CUDA_VISIBLE_DEVICES=0 python train_luar_on_sadiri_batchingvariations.py \
-    --train_file_path "../data/ta2_jan_2025_trian_data/anchor_pos_train_sadiri_luarmudsbertamllv2.jsonl" \
-    --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
-    --type_ "get_anchorpos_hardmix_batches" \
-    --model_op_dir_name "sadiri_v001"
--- cancelled ./run_eval_script_on_lora_training.sh "sadiri_v001_get_anchorpos_hardmix_batches_20250404_014414"
+./run_kfold_eval_script_on_lora_training.sh "sadiri_filtered_org_random_batching_v001"
+CUDA_VISIBLE_DEVICES=2 python train_luar_on_sadiri.py
+./run_kfold_eval_script_on_lora_training.sh "sadiri_filtered_org_random_batching_v001"
+==== All 5 folds completed. Calculating average metrics... ====
+==== Averaged Metrics Over 5 Folds ====
+Area Under ROC Curve           .743101
+partial Area Under ROC Curve   .565955
+Precision                      0
+Recall                         0
+F1                             0
+Equal Error Rate               .281564
+Detection Cost Function        .864456
+TAR@0.05                       .355247
+=======================================
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/kft_sadiri_filtered_org_random_batching_v001_eval_op.txt
 
 
 CUDA_VISIBLE_DEVICES=1 python train_luar_on_sadiri_batchingvariations.py \
@@ -174,7 +159,7 @@ CUDA_VISIBLE_DEVICES=1 python train_luar_on_sadiri_batchingvariations.py \
     --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
     --type_ "get_anchorpos_random_batches" \
     --model_op_dir_name "sadiri_v002"
-./run_eval_script_on_lora_training.sh "sadiri_v002_get_anchorpos_random_batches_20250404_002721"
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v002_get_anchorpos_random_batches_20250404_002721"
 ==== All 5 folds completed. Calculating average metrics... ====
 ==== Averaged Metrics Over 5 Folds ====
 Area Under ROC Curve           .750128
@@ -194,7 +179,7 @@ CUDA_VISIBLE_DEVICES=2 python train_luar_on_sadiri_batchingvariations.py \
     --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
     --type_ "get_anchorpos_cachedrankingloss_hardbatches" \
     --model_op_dir_name "sadiri_v002"
-./run_eval_script_on_lora_training.sh "sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233"
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233"
 ==== All 5 folds completed. Calculating average metrics... ====
 ==== Averaged Metrics Over 5 Folds ====
 Area Under ROC Curve           .708773
@@ -209,29 +194,13 @@ TAR@0.05                       .291909
 Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/kft_sadiri_v002_get_anchorpos_cachedrankingloss_hardbatches_20250404_000233_eval_op.txt
 
 
-CUDA_VISIBLE_DEVICES=2 python train_luar_on_sadiri.py
-./run_eval_script_on_lora_training.sh "sadiri_filtered_org_random_batching_v001"
-==== All 5 folds completed. Calculating average metrics... ====
-==== Averaged Metrics Over 5 Folds ====
-Area Under ROC Curve           .743101
-partial Area Under ROC Curve   .565955
-Precision                      0
-Recall                         0
-F1                             0
-Equal Error Rate               .281564
-Detection Cost Function        .864456
-TAR@0.05                       .355247
-=======================================
-Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/kft_sadiri_filtered_org_random_batching_v001_eval_op.txt
-
-
 cuda 0 biber use raw file to yield random anchor-pos 
 CUDA_VISIBLE_DEVICES=0 python train_luar_on_sadiri_batchingvariations.py \
     --train_file_path "../data/biber/genre_data/biber_train_luar_sbert_genre_embeddings_v001.jsonl" \
     --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
     --type_ "get_samplinganchorpos_random_batches" \
     --model_op_dir_name "sadiri_v001_biber"
-./run_eval_script_on_lora_training.sh "sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434"
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v001_biber_get_samplinganchorpos_random_batches_20250406_002434"
 ==== All 5 folds completed. Calculating average metrics... ====
 ==== Averaged Metrics Over 5 Folds ====
 Area Under ROC Curve           .802185
@@ -251,7 +220,7 @@ CUDA_VISIBLE_DEVICES=1 python train_luar_on_sadiri_batchingvariations.py \
     --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
     --type_ "get_anchorpos_random_batches" \
     --model_op_dir_name "sadiri_v001_biber"
-./run_eval_script_on_lora_training.sh "sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441"
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v001_biber_get_anchorpos_random_batches_20250406_002441"
 ==== All 5 folds completed. Calculating average metrics... ====
 ==== Averaged Metrics Over 5 Folds ====
 Area Under ROC Curve           .840999
@@ -272,6 +241,28 @@ CUDA_VISIBLE_DEVICES=2 python train_luar_on_sadiri_batchingvariations.py \
     --type_ "get_anchorpos_cached_hardbatches" \
     --model_op_dir_name "sadiri_v001_biber" \
     --epochs 1
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445"
+==== All 5 folds completed. Calculating average metrics... ====
+==== Averaged Metrics Over 5 Folds ====
+Area Under ROC Curve           .840203
+partial Area Under ROC Curve   .519065
+Precision                      0
+Recall                         0
+F1                             0
+Equal Error Rate               .231554
+Detection Cost Function        .949695
+TAR@0.05                       .284598
+=======================================
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/kft_sadiri_v001_biber_get_anchorpos_cached_hardbatches_20250406_002445_eval_op.txt
+
+
+CUDA_VISIBLE_DEVICES=2 python train_luar_on_sadiri_batchingvariations.py \
+--train_file_path "../data/biber/genre_data/biber_train_sadiri_anchorpos_cachedhardmixbatches_epochs3.jsonl" \
+--dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
+--type_ "get_anchorpos_cached_hardbatches" \
+--model_op_dir_name "sadiri_v002_biber" \
+--epochs 1 --lora_config_r 32
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v002_biber_get_anchorpos_cached_hardbatches_20250406_231206"
 
 running: cuda 3 hard batches cached mixes 
 CUDA_VISIBLE_DEVICES=3 python train_luar_on_sadiri_batchingvariations.py \
@@ -279,6 +270,19 @@ CUDA_VISIBLE_DEVICES=3 python train_luar_on_sadiri_batchingvariations.py \
     --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
     --type_ "get_anchorpos_random_batches" \
     --model_op_dir_name "sadiri_v001_filtered"
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448"
+==== All 5 folds completed. Calculating average metrics... ====
+==== Averaged Metrics Over 5 Folds ====
+Area Under ROC Curve           .760412
+partial Area Under ROC Curve   .575663
+Precision                      0
+Recall                         0
+F1                             0
+Equal Error Rate               .272083
+Detection Cost Function        .811801
+TAR@0.05                       .384527
+=======================================
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/kft_sadiri_v001_filtered_get_anchorpos_random_batches_20250406_002448_eval_op.txt
 
 running: cuda 0 hard batches cached mixes 
 CUDA_VISIBLE_DEVICES=0 python train_luar_on_sadiri_batchingvariations.py \
@@ -287,6 +291,7 @@ CUDA_VISIBLE_DEVICES=0 python train_luar_on_sadiri_batchingvariations.py \
 --type_ "get_anchorpos_cached_hardbatches" \
 --model_op_dir_name "sadiri_v001_filtered" \
 --logging_steps 400 --eval_steps 1600 --save_steps 1600
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v001_filtered_get_anchorpos_cached_hardbatches_20250406_125236"
 
 cuda 1 biber cached hard batches randpmly select anchorpos pairs
 CUDA_VISIBLE_DEVICES=1 python train_luar_on_sadiri_batchingvariations.py \
@@ -295,7 +300,7 @@ CUDA_VISIBLE_DEVICES=1 python train_luar_on_sadiri_batchingvariations.py \
     --type_ "get_anchorpos_random_batches" \
     --model_op_dir_name "sadiri_v002_biber" \
     --learning_rate 0.001 --epochs 4 --lora_config_lora_dropout 0.5
-./run_eval_script_on_lora_training.sh "sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459"
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459"
 ==== All 5 folds completed. Calculating average metrics... ====
 ==== Averaged Metrics Over 5 Folds ====
 Area Under ROC Curve           .836206
@@ -310,9 +315,13 @@ TAR@0.05                       .329933
 Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/kft_sadiri_v002_biber_get_anchorpos_random_batches_20250406_040459_eval_op.train_sadiri_hardmixbatches_1743775820
 
 
-CUDA_VISIBLE_DEVICES=1 python train_luar_on_sadiri_batchingvariations.py     --train_file_path "../data/biber/genre_data/biber_train_anchorpos_raw_v001.jsonl"     --dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl"     --type_ "get_anchorpos_random_batches"     --model_op_dir_name "sadiri_v003_biber"     --learning_rate 0.0001 --epochs 3 --lora_config_lora_dropout 0.2 --logging_steps 200 --ev
-al_steps 200 --save_steps 1000
-./run_eval_script_on_lora_training.sh "sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208"
+CUDA_VISIBLE_DEVICES=1 python train_luar_on_sadiri_batchingvariations.py \
+--train_file_path "../data/biber/genre_data/biber_train_anchorpos_raw_v001.jsonl" \
+--dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
+--type_ "get_anchorpos_random_batches" \
+--model_op_dir_name "sadiri_v003_biber" \
+--learning_rate 0.0001 --epochs 3 --lora_config_lora_dropout 0.2 --logging_steps 200 --eval_steps 200 --save_steps 1000
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v003_biber_get_anchorpos_random_batches_20250406_105208"
 ==== All 5 folds completed. Calculating average metrics... ====
 ==== Averaged Metrics Over 5 Folds ====
 Area Under ROC Curve           .839047
@@ -334,3 +343,128 @@ CUDA_VISIBLE_DEVICES=1 python train_luar_on_sadiri_batchingvariations.py \
 --model_op_dir_name "sadiri_v004_biber" \
 --learning_rate 0.001 --epochs 2 --lora_config_lora_dropout 0.2 \
 --logging_steps 100 --eval_steps 200 --save_steps 1000
+./run_kfold_eval_script_on_lora_training.sh  "sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702"
+==== All 5 folds completed. Calculating average metrics... ====
+==== Averaged Metrics Over 5 Folds ====
+Area Under ROC Curve           .834441
+partial Area Under ROC Curve   .531167
+Precision                      0
+Recall                         0
+F1                             0
+Equal Error Rate               .237827
+Detection Cost Function        .936967
+TAR@0.05                       .293166
+=======================================
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/kft_sadiri_v004_biber_get_anchorpos_random_batches_20250406_124702_eval_op.txt
+
+
+CUDA_VISIBLE_DEVICES=1 python train_luar_on_sadiri_batchingvariations.py \
+--train_file_path "../data/biber/genre_data/biber_train_anchorpos_raw_v001.jsonl" \
+--dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
+--type_ "get_anchorpos_random_batches" \
+--model_op_dir_name "sadiri_v005_biber" \
+--learning_rate 0.0001 --epochs 5
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447"
+==== All 5 folds completed. Calculating average metrics... ====
+==== Averaged Metrics Over 5 Folds ====
+Area Under ROC Curve           .836471
+partial Area Under ROC Curve   .534724
+Precision                      0
+Recall                         0
+F1                             0
+Equal Error Rate               .225364
+Detection Cost Function        .926634
+TAR@0.05                       .326813
+=======================================
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/kft_sadiri_v005_biber_get_anchorpos_random_batches_20250406_151447_eval_op.txt
+
+
+CUDA_VISIBLE_DEVICES=1 python train_luar_on_sadiri_batchingvariations.py \
+--train_file_path "../data/biber/genre_data/biber_train_anchorpos_raw_v001.jsonl" \
+--dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
+--type_ "get_anchorpos_random_batches" \
+--model_op_dir_name "sadiri_v006_biber" \
+--learning_rate 0.0004 --epochs 2 --lora_config_r 8
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431"
+==== All 5 folds completed. Calculating average metrics... ====
+==== Averaged Metrics Over 5 Folds ====
+Area Under ROC Curve           .836737
+partial Area Under ROC Curve   .530565
+Precision                      0
+Recall                         0
+F1                             0
+Equal Error Rate               .230734
+Detection Cost Function        .927001
+TAR@0.05                       .313266
+=======================================
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/kft_sadiri_v006_biber_get_anchorpos_random_batches_20250406_181431_eval_op.txt
+
+
+CUDA_VISIBLE_DEVICES=1 python train_luar_on_sadiri_batchingvariations.py \
+--train_file_path "../data/biber/genre_data/biber_train_anchorpos_raw_v001.jsonl" \
+--dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
+--type_ "get_anchorpos_random_batches" \
+--model_op_dir_name "sadiri_v007_biber" \
+--lora_config_r 32
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915"
+==== All 5 folds completed. Calculating average metrics... ====
+==== Averaged Metrics Over 5 Folds ====
+Area Under ROC Curve           .848020
+partial Area Under ROC Curve   .535726
+Precision                      0
+Recall                         0
+F1                             0
+Equal Error Rate               .225499
+Detection Cost Function        .919334
+TAR@0.05                       .328250
+=======================================
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/kft_sadiri_v007_biber_get_anchorpos_random_batches_20250406_202915_eval_op.txt
+
+
+CUDA_VISIBLE_DEVICES=1 python train_luar_on_sadiri_batchingvariations.py \
+--train_file_path "../data/biber/genre_data/biber_train_anchorpos_raw_v001.jsonl" \
+--dev_file_path "../data/ta2_jan_2025_trian_data/dev_sadiri_processed_with_embeddings_wo_ao3_filtered.jsonl" \
+--type_ "get_anchorpos_random_batches" \
+--model_op_dir_name "sadiri_v008_biber" \
+--lora_config_r 32 --epochs 10
+./run_kfold_eval_script_on_lora_training.sh "sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825"
+==== All 5 folds completed. Calculating average metrics... ====
+==== Averaged Metrics Over 5 Folds ====
+Area Under ROC Curve           .831073
+partial Area Under ROC Curve   .530929
+Precision                      0
+Recall                         0
+F1                             0
+Equal Error Rate               .234721
+Detection Cost Function        .937623
+TAR@0.05                       .266663
+=======================================
+Log File: /data/araghavan/HIATUS/datadreamer-ta2/output/logs/kft_sadiri_v008_biber_get_anchorpos_random_batches_20250406_230825_eval_op.txt
+
+
+
+python -u main.py \
+--input-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/english_TA2_p1_and_p2_dev_20240207_v2/TA2/data/" \
+--output-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/english_TA2_p1_and_p2_dev_20240207_v2_outputs/test1" \
+--ground-truth-dir "/data/araghavan/HIATUS/datadreamer-ta2/data/hrs/english_TA2_p1_and_p2_dev_20240207_v2/TA2/groundtruth/" \
+--run-id 14 --query-identifier authorIDs --candidate-identifier authorSetIDs -ta1 datadreamer_lora -g -ta2 baseline --language eng
+
+
+
+types of files:
+- data is at author-doc level
+- data is at author-anchor-pos level
+- data is at author-anchor-pos-batch_id level
+
+data sampling strategies:
+- "get_samplinganchorpos_random_batches": agg docs at author level, select random 2 docs as anchor-pos
+- "get_anchorpos_random_batches": agg docs at author level, select random 1 anchor-pos pair
+- "get_anchorpos_cached_hardbatches": use the batch_id column (created with whatever logic)
+
+Summary:
+Biber training > Previous Sadiri Hard Positive Filtered
+
+
+
+
+
